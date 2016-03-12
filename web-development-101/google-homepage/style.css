@@ -260,13 +260,24 @@ strong {
     border-bottom: 1px solid #E4E4E4;
     border-top: 1px solid #E4E4E4;
     margin-bottom: 25px;
-    padding: 15px 8px;
+    padding: 17px 8px;
     margin: 0;
+}
+
+.related-search-title {
+    display: block;
+    padding-bottom: 8px;
+    font-size: 1.3em;
+}
+
+.other-search {
+    padding-right: 20px;
 }
 
 .other-search li {
     display: block;
-    padding-left: 0;
+    padding: 4px 0;
+
 }
 
 
