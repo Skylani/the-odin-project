@@ -280,27 +280,50 @@ strong {
 
 }
 
+.page-nav {
+    width: 370px;
+    margin: 10px auto;
+}
 
+.page-nav a {
+    color: #4285F4;
+}
 
+.page-o {
+    width: 20px;
+    display: inline-block;
+    text-align: center;
+    margin-top: 10px;
+    line-height: 1.8em;
+}
 
-
-
-
-
-
-
-
-
-
-
-
+.next-page {
+    width: 82px;
+    display: inline-block;
+    text-align: right;
+    line-height: 1.1em;
+}
 
 
 
 .result-footer {
-    height: 100px;
+    height: 80px;
 
 }
+.footer {
+    padding: 20px 0 0 15px;
+}
+
+.footer li {
+    padding: 20px 20px 0 0;
+}
+
+.footer a:hover {
+    color: #393939;
+}
+
+
+
 .clearfix:before,
 .clearfix:after {
     content: "";
