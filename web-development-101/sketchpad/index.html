@@ -23,6 +23,9 @@
 
 <script type="text/javascript">
 
+    var size = 16;
+    var yellow = "#D9BE1B";
+
     function startSketching() {
         $('.grid-cell').on('mouseenter', function(){
             $(this).addClass('color');
@@ -102,25 +105,34 @@
 
     }
 
-    $(document).ready(function(){
+    function yellowPen(thisSquare) {thisSquare.css("background-color", yellow);}
+    function randomColorPen(thisSquare) {thisSquare.css("background-color", getRandomColor());}
+    function opacityPen(thisSquare) {
+        var opacity = thisSquare.css("opacity");
+        if(opacity > 0)
+            thisSquare.css("opacity", opacity - 0.1);
+    }
 
-        var size = 16;
-        var yellow = "#D9BE1B";
-        var color = yellow;
+    function draw(pen) {
+        $('.container').on('mousedown', function() {
+            $('.square').on('mouseenter', function() {
+                pen($(this));
+            });
+        }).on('mouseup', function() {
+            $('.square').off('mouseenter');
+        });
+    }
+
+
+    $(document).ready(function(){
 
         // create 16x16 grid
         floatGrid(size);
         // tableGrid(size, '.container');
         // inlineBlkGrid(size);
 
+        // listening events
 
-        // $('.grid-cell').on('mouseleave', function(){
-        //     $(this).animate('backgroundColor:#fff', 200, function(){
-        //         $(this).removeClass('color');
-        //     });
-        // });
-
-        // listening event
         $('#newBtn').on('click', function() {
             // clear grid
             $('.square').remove();
@@ -133,48 +145,25 @@
             updateGridCellSize(size);
         });
 
+
+        // draw with yellow pen
         $('#yellowBtn').on('click', function() {
-            color = yellow;
-            $('.container').on('mousedown', function() {
-                $('.square').on('mouseenter', function() {
-                    $(this).css("background-color", yellow);
-                });
-            }).on('mouseup', function() {
-                $('.square').off('mouseenter');
-            });
+            draw(yellowPen);
         });
 
+        // draw with random color pen
         $('#colorBtn').on('click', function() {
-            $('.container').on('mousedown', function() {
-                $('.square').on('mouseenter',function() {
-                    $(this).css("background-color", getRandomColor());
-                });
-            }).mouseup(function() {
-                $('.square').off('mouseenter');
-            });
+            draw(randomColorPen);
         });
 
+        // turn on opacity pen
         $('#opacityBtn').on('click', function() {
-            $('.container').on('mousedown', function() {
-                $('.square').on('mouseenter', function() {
-                    var opacity = $(this).css("opacity");
-                    if(opacity > 0)
-                        $(this).css("opacity", opacity - 0.1);
-
-                });
-            }).mouseup(function() {
-                $('.square').off('mouseenter');
-            });
+            draw(opacityPen);
         });
 
         $('#clearBtn').on('click', function() {
             $('.square').css("background-color", "#666");
-            startSketching();
         });
-
-
-
-
 
     });
 
