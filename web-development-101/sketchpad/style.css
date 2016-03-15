@@ -1,0 +1,36 @@
+.container {
+    margin: 10px auto;
+    width: 600px;
+}
+
+.grid-cell {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #000000;
+    box-sizing: border-box;
+}
+
+/* float div grid */
+.square {
+    float: left;
+}
+
+.square.clear {
+    clear: both;
+}
+
+
+/* table grid */
+
+.squareCell {
+    display: table-cell;
+
+}
+.squareRow {
+    display: table;
+}
+
+/* inline block grid */
+.square-inline-blk {
+    display: inline-block;
+}

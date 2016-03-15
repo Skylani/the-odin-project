@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sketchpad</title>
+    <script   src="https://code.jquery.com/jquery-2.2.1.min.js"   integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="   crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function(){
+
+        var size = 16;
+
+        // create one big container for all divs
+        $('body').append("<div class='container'></div>");
+
+        // create 16x16 grid
+        floatClearGrid(size);
+        // tableGrid(size, '.container');
+        // inlineBlkGrid(size);
+
+
+
+        // create grid using float and clear
+        function floatClearGrid(size) {
+
+            var square = "<div class='square grid-cell'></div>";
+            var clearSquare = "<div class='clear square grid-cell'></div>";
+
+            for(var i = 0; i < size; i++) {
+                // clear a row
+                $('.container').append(clearSquare);
+
+                for(var j = 1; j < size; j++) {
+                    $('.container').append(square);
+                }
+            }
+        }
+
+        // NOT WORKING! Create grid using CSS table
+        function tableGrid(size, container) {
+
+            var squareCell = "<div class='squareCell grid-cell'></div>";
+            var squareRow = "<div class='squareRow'></div>";
+
+            for(var i = 0; i < size; i++) {
+                // create a table row
+                $('.container').append(squareRow);
+                console.log('create table row');
+
+                for(var j = 0; j < size; j++) {
+                    $('.squareRow').append(squareCell);
+                    console.log('create table cell');
+
+                }
+            }
+        }
+
+        // Create grid using inline blocks
+        function inlineBlkGrid(size) {
+
+            var squareInlineBlk = "<div class='square-inline-blk grid-cell'></div>";
+
+            for(var i = 0; i < size; i++) {
+
+                for(var j = 0; j < size; j++) {
+                    $('.container').append(squareInlineBlk);
+                }
+                $('.container').append("<br>");
+            }
+
+        }
+    });
+
+</script>
+</body>
+</html>
