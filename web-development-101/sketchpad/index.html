@@ -10,9 +10,9 @@
     <header><h1>Sketchpad by Lani Huang</h1></header>
     <div class="buttons">
         <button id="newBtn">New Grid</button>
-        <button id="yellowBtn">Yellow</button>
-        <button id="colorBtn">Random Color</button>
-        <button id="opacityBtn">Opacity</button>
+        <button id="yellowBtn" class="penBtn">Yellow</button>
+        <button id="colorBtn" class="penBtn">Random Color</button>
+        <button id="opacityBtn" class="penBtn">Opacity</button>
         <button id="clearBtn">Clear</button>
     </div>
 
@@ -25,12 +25,6 @@
 
     var size = 16;
     var yellow = "#D9BE1B";
-
-    function startSketching() {
-        $('.grid-cell').on('mouseenter', function(){
-            $(this).addClass('color');
-        });
-    }
 
     function getRandomColor() {
         var letters = '0123456789ABCDEF'.split('');
@@ -47,14 +41,11 @@
         var squareSize = calculateSquareWidth(size);
         $('.grid-cell').css("width", squareSize+"px");
         $('.grid-cell').css("height", squareSize+"px");
-
-
     }
 
     function calculateSquareWidth(size) {
         return $('.container').width() / size - 2;
     }
-
 
     // create grid using float and clear
     function floatGrid(size) {
@@ -86,7 +77,6 @@
             for(var j = 0; j < size; j++) {
                 $('.squareRow').append(squareCell);
                 console.log('create table cell');
-
             }
         }
     }
@@ -102,7 +92,6 @@
             }
             $('.container').append("<br>");
         }
-
     }
 
     function yellowPen(thisSquare) {thisSquare.css("background-color", yellow);}
@@ -111,16 +100,6 @@
         var opacity = thisSquare.css("opacity");
         if(opacity > 0)
             thisSquare.css("opacity", opacity - 0.1);
-    }
-
-    function draw(pen) {
-        $('.container').on('mousedown', function() {
-            $('.square').on('mouseenter', function() {
-                pen($(this));
-            });
-        }).on('mouseup', function() {
-            $('.square').off('mouseenter');
-        });
     }
 
 
@@ -146,20 +125,34 @@
         });
 
 
-        // draw with yellow pen
-        $('#yellowBtn').on('click', function() {
-            draw(yellowPen);
+        $('.penBtn').on('click', function() {
+            highlightBtn($(this));
+            draw($(this));
         });
 
-        // draw with random color pen
-        $('#colorBtn').on('click', function() {
-            draw(randomColorPen);
-        });
+        // need fixed
+        function highlightBtn(btn) {
+            $(this).css("background-color", "blue");
+            console.log('highlightBtn');
+        }
 
-        // turn on opacity pen
-        $('#opacityBtn').on('click', function() {
-            draw(opacityPen);
-        });
+        // Draw with the selected pen
+        function draw(penBtn) {
+            $('.container').on('mousedown', function() {
+                $('.square').on('mouseenter', function() {
+
+                    var btnName = penBtn.attr('id');
+                    switch(btnName) {
+                        case 'yellowBtn':  yellowPen($(this)); break;
+                        case 'colorBtn':   randomColorPen($(this)); break;
+                        case 'opacityBtn': opacityPen($(this)); break;
+                    }
+
+                });
+            }).on('mouseup', function() {
+                $('.square').off('mouseenter');
+            });
+        }
 
         $('#clearBtn').on('click', function() {
             $('.square').css("background-color", "#666");
