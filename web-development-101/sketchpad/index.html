@@ -12,6 +12,7 @@
         <button id="newBtn">New Grid</button>
         <button id="yellowBtn">Yellow</button>
         <button id="colorBtn">Random Color</button>
+        <button id="opacityBtn">Opacity</button>
         <button id="clearBtn">Clear</button>
     </div>
 
@@ -112,10 +113,6 @@
         // tableGrid(size, '.container');
         // inlineBlkGrid(size);
 
-        $('.square').hover(function(){
-            // $(this).addClass('color');
-            $(this).css('background-color', color);
-        });
 
         // $('.grid-cell').on('mouseleave', function(){
         //     $(this).animate('backgroundColor:#fff', 200, function(){
@@ -123,6 +120,7 @@
         //     });
         // });
 
+        // listening event
         $('#newBtn').on('click', function() {
             // clear grid
             $('.square').remove();
@@ -133,19 +131,39 @@
             // draw new grid in same total space
             floatGrid(size);
             updateGridCellSize(size);
-            startSketching();
         });
 
         $('#yellowBtn').on('click', function() {
             color = yellow;
-            $('.square').hover(function() {
-                $(this).css("background-color", yellow);
+            $('.container').on('mousedown', function() {
+                $('.square').on('mouseenter', function() {
+                    $(this).css("background-color", yellow);
+                });
+            }).on('mouseup', function() {
+                $('.square').off('mouseenter');
             });
         });
 
         $('#colorBtn').on('click', function() {
-            $('.square').hover(function() {
-                $(this).css("background-color", getRandomColor());
+            $('.container').on('mousedown', function() {
+                $('.square').on('mouseenter',function() {
+                    $(this).css("background-color", getRandomColor());
+                });
+            }).mouseup(function() {
+                $('.square').off('mouseenter');
+            });
+        });
+
+        $('#opacityBtn').on('click', function() {
+            $('.container').on('mousedown', function() {
+                $('.square').on('mouseenter', function() {
+                    var opacity = $(this).css("opacity");
+                    if(opacity > 0)
+                        $(this).css("opacity", opacity - 0.1);
+
+                });
+            }).mouseup(function() {
+                $('.square').off('mouseenter');
             });
         });
 
