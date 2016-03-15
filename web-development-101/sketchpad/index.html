@@ -11,7 +11,7 @@
     <div class="buttons">
         <button id="newBtn">New Grid</button>
         <button id="yellowBtn">Yellow</button>
-        <button id="colorBtn">Color</button>
+        <button id="colorBtn">Random Color</button>
         <button id="clearBtn">Clear</button>
     </div>
 
@@ -104,15 +104,17 @@
     $(document).ready(function(){
 
         var size = 16;
-        var color = #D9BE1B;
+        var yellow = "#D9BE1B";
+        var color = yellow;
 
         // create 16x16 grid
         floatGrid(size);
         // tableGrid(size, '.container');
         // inlineBlkGrid(size);
 
-        $('.grid-cell').on('mouseenter', function(){
-            $(this).addClass('color');
+        $('.square').hover(function(){
+            // $(this).addClass('color');
+            $(this).css('background-color', color);
         });
 
         // $('.grid-cell').on('mouseleave', function(){
@@ -135,23 +137,21 @@
         });
 
         $('#yellowBtn').on('click', function() {
+            color = yellow;
             $('.square').hover(function() {
-                $(this).addClass('color');
+                $(this).css("background-color", yellow);
             });
         });
 
         $('#colorBtn').on('click', function() {
             $('.square').hover(function() {
-                $(this).removeClass('color');
                 $(this).css("background-color", getRandomColor());
             });
         });
 
         $('#clearBtn').on('click', function() {
-            $('.color').removeClass('color');
             $('.square').css("background-color", "#666");
             startSketching();
-
         });
 
 
