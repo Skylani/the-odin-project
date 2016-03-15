@@ -8,6 +8,11 @@
 </head>
 <body>
 
+    <button id="clearBtn">Clear</button>
+<div class="container">
+
+</div>
+
 
 <script type="text/javascript">
 
@@ -15,14 +20,45 @@
 
         var size = 16;
 
-        // create one big container for all divs
-        $('body').append("<div class='container'></div>");
+
 
         // create 16x16 grid
         floatClearGrid(size);
         // tableGrid(size, '.container');
         // inlineBlkGrid(size);
 
+        $('.grid-cell').on('mouseenter', function(){
+            $(this).addClass('color');
+        });
+
+        // $('.grid-cell').on('mouseleave', function(){
+        //     $(this).animate('backgroundColor:#fff', 200, function(){
+        //         $(this).removeClass('color');
+        //     });
+        // });
+
+        $('#clearBtn').on('click', function() {
+            // clear grid
+            $('.square').remove();
+
+            // ask for new grid size
+            size = prompt("How many squares per side to make a new grid?");
+
+            // draw new grid in same total space
+            updateGridCellSize(size);
+            floatClearGrid(size);
+
+        });
+
+        function updateGridCellSize(size) {
+            var squareSize = calculateSquareWidth(size);
+            $('.grid-cell').css({"width":squareSize+"px", "height":squareSize+"px"});
+
+        }
+
+        function calculateSquareWidth(size) {
+            return $('.container').width() / size - 2;
+        }
 
 
         // create grid using float and clear
@@ -66,7 +102,6 @@
             var squareInlineBlk = "<div class='square-inline-blk grid-cell'></div>";
 
             for(var i = 0; i < size; i++) {
-
                 for(var j = 0; j < size; j++) {
                     $('.container').append(squareInlineBlk);
                 }
@@ -74,6 +109,8 @@
             }
 
         }
+
+
     });
 
 </script>

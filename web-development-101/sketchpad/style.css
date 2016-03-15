@@ -1,13 +1,14 @@
 .container {
     margin: 10px auto;
-    width: 600px;
+    width: 512px;
 }
 
 .grid-cell {
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     border: 1px solid #000000;
     box-sizing: border-box;
+    margin: 1px;
 }
 
 /* float div grid */
@@ -33,4 +34,10 @@
 /* inline block grid */
 .square-inline-blk {
     display: inline-block;
+}
+
+
+/* hover effect */
+.color {
+    background-color: #D9BE1B;
 }
