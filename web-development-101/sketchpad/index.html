@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header><h1>Sketchpad by Lani Huang</h1></header>
+    <header><h1>Sketchpad</h1></header>
     <div class="buttons">
         <button id="newBtn">New Grid</button>
         <button id="yellowBtn" class="penBtn">Yellow</button>
@@ -102,7 +102,6 @@
             thisSquare.css("opacity", opacity - 0.1);
     }
 
-
     $(document).ready(function(){
 
         // create 16x16 grid
@@ -126,15 +125,11 @@
 
 
         $('.penBtn').on('click', function() {
-            highlightBtn($(this));
+            $('.penBtn').removeClass('clicked');
+            $(this).addClass('clicked');
             draw($(this));
         });
 
-        // need fixed
-        function highlightBtn(btn) {
-            $(this).css("background-color", "blue");
-            console.log('highlightBtn');
-        }
 
         // Draw with the selected pen
         function draw(penBtn) {
@@ -148,6 +143,8 @@
                         case 'opacityBtn': opacityPen($(this)); break;
                     }
 
+
+
                 });
             }).on('mouseup', function() {
                 $('.square').off('mouseenter');
@@ -155,7 +152,8 @@
         }
 
         $('#clearBtn').on('click', function() {
-            $('.square').css("background-color", "#666");
+            $('.square').css({"background-color": "#666",
+                              "opacity": "1"});
         });
 
     });

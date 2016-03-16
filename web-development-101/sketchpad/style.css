@@ -7,10 +7,12 @@ header {
     font-family: sans-serif;
     text-align: center;
     padding-top: 20px;
+    font-size: 30px;
+    margin-bottom: 50px;
 }
 
 .buttons {
-    margin: 80px 20px 0 200px;
+    margin: 0 20px 0 200px;
     width: 300px;
     float: left;
 }
@@ -25,18 +27,20 @@ button {
     color: #fff;
     background-color: #666;
 }
+button.clicked {
+    background-color: #D9BE1B;
+}
 button:focus {
     outline: none;
 }
 
 #clearBtn {
     background-color: #BB2C1A;
-
 }
 
 .container {
     float: left;
-    margin: 80px auto;
+    margin: 0 auto;
     width: 512px;
 }
 
