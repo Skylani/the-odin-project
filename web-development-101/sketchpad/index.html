@@ -94,13 +94,35 @@
         }
     }
 
-    function yellowPen(thisSquare) {thisSquare.css("background-color", yellow);}
-    function randomColorPen(thisSquare) {thisSquare.css("background-color", getRandomColor());}
+    function yellowPen(thisSquare) {thisSquare.css({"background-color": yellow, "opacity": 1});}
+    function randomColorPen(thisSquare) {thisSquare.css({"background-color": getRandomColor(), "opacity": 1});}
+
     function opacityPen(thisSquare) {
         var opacity = thisSquare.css("opacity");
         if(opacity > 0)
             thisSquare.css("opacity", opacity - 0.1);
     }
+
+    // Draw with the selected pen
+    function draw(penBtn) {
+        $('.container').off();  // detach previously attached listener
+
+        // draw when mousedown
+        $('.container').on('mousedown', function() {
+            $('.square').on('mouseenter', function() {
+                var btnName = penBtn.attr('id');
+                switch(btnName) {
+                    case 'yellowBtn':  yellowPen($(this)); break;
+                    case 'colorBtn':   randomColorPen($(this)); break;
+                    case 'opacityBtn': opacityPen($(this)); break;
+                }
+            });
+        // stop drawing when mouseup
+        }).on('mouseup', function() {
+            $('.square').off('mouseenter');
+        });
+    }
+
 
     $(document).ready(function(){
 
@@ -125,31 +147,10 @@
 
 
         $('.penBtn').on('click', function() {
-            $('.penBtn').removeClass('clicked');
+            $('.clicked').removeClass('clicked');
             $(this).addClass('clicked');
             draw($(this));
         });
-
-
-        // Draw with the selected pen
-        function draw(penBtn) {
-            $('.container').on('mousedown', function() {
-                $('.square').on('mouseenter', function() {
-
-                    var btnName = penBtn.attr('id');
-                    switch(btnName) {
-                        case 'yellowBtn':  yellowPen($(this)); break;
-                        case 'colorBtn':   randomColorPen($(this)); break;
-                        case 'opacityBtn': opacityPen($(this)); break;
-                    }
-
-
-
-                });
-            }).on('mouseup', function() {
-                $('.square').off('mouseenter');
-            });
-        }
 
         $('#clearBtn').on('click', function() {
             $('.square').css({"background-color": "#666",
