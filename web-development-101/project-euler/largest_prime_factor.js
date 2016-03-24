@@ -14,7 +14,7 @@ var findPrimeFactor = function(num) {
     return 1; // num is prime
 };
 
-function recur(num) {
+function largestPrimeFactor(num) {
     var primeFactor = findPrimeFactor(num);
 
     // base case
@@ -22,11 +22,11 @@ function recur(num) {
         return num;
     }
     else {
-        return recur(num/primeFactor);
+        return largestPrimeFactor(num/primeFactor);
     }
 }
 
 var num = 600851475143;
-var ans = recur(num);
+var ans = largestPrimeFactor(num);
 
 console.log("The largest prime factor of the number " + num + " is " + ans);
