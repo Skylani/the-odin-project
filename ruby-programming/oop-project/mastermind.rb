@@ -6,11 +6,45 @@ class Mastermind
     @code = Code.new
   end
 
+  def getMode
+    loop do
+      puts '[c]reator or [g]uesser?'
+      answer = gets.chomp
+      if answer == 'g'
+        return 'g'
+      elsif answer == 'c'
+        return 'c'
+      else
+        puts 'Invalid input. Type \'c\' or \'g\''
+      end
+    end
+
+  end
+
   def play
+    loop do
+      mode = getMode
+
+      if mode == 'g'
+        guesserMode
+      else
+        creatorMode
+      end
+
+      puts 'New game? [y/n]'
+      answer = gets.chomp
+      unless answer == 'y'
+        break
+      end
+    end
+  end
+
+  def guesserMode
     win = false
+    turns = 1
 
     TURNS.times do
-      print ': '
+      print "guess ##{turns}: "
 
       # player guess
       @guess = gets.chomp
@@ -19,12 +53,13 @@ class Mastermind
 
       # check guess
       if @code.array == @guess
-        puts 'Code breaked! You win!'
+        puts "Code breaked! You win in #{turns} turns!"
         win = true
         break
       else
         calculate_keys
         feedback
+        turns += 1
       end
     end
 
