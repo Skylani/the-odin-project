@@ -3,7 +3,6 @@ class Mastermind
   TURNS = 12
 
   def initialize
-    @code = Code.new
   end
 
   def getMode
@@ -39,7 +38,24 @@ class Mastermind
     end
   end
 
+  def creatorMode
+    print 'create code: '
+    @code = getCode
+
+    # computer make a guess
+
+  end
+
+  def getCode
+    code = gets.chomp
+    code = code.split
+    code.map! { |e| e.to_sym }
+    code
+  end
+
+
   def guesserMode
+    @code = Code.new # generate random code
     win = false
     turns = 1
 
@@ -47,9 +63,7 @@ class Mastermind
       print "guess ##{turns}: "
 
       # player guess
-      @guess = gets.chomp
-      @guess = @guess.split
-      @guess.map! { |e| e.to_sym }
+      @guess = getCode
 
       # check guess
       if @code.array == @guess
