@@ -34,8 +34,12 @@ def save_thank_you_letters(id, form_letter)
   end
 end
 
-def peak_hour(regtime_hash)
-  regtime_hash.max_by{ |hour, reg| reg }[0]
+def clean_date(regtime)
+  regtime.gsub(/\/(\d\d) /, '/20\1 ')
+end
+
+def peak(hash)
+  hash.max_by{ |k, v| v}[0]
 end
 
 puts "EventManager Initialized!"
@@ -44,13 +48,15 @@ contents = CSV.open "event_attendees.csv", headers: true, header_converters: :sy
 template_letter = File.read "form_letter.erb"
 erb_template = ERB.new template_letter
 regtime_hash = Hash.new(0)
+regday_hash = Hash.new(0)
 
 contents.each do |row|
   id = row[0]
   name = row[:first_name]
 
-  regtime = DateTime.strptime(row[1], '%m/%d/%Y %H:%M')
+  regtime = DateTime.strptime(clean_date(row[1]), '%m/%d/%Y %H:%M')
   regtime_hash[regtime.hour] += 1
+  regday_hash[regtime.wday] += 1
 
   zipcode = clean_zipcode(row[:zipcode])
   phone = clean_phone_number(row[:homephone])
@@ -58,7 +64,8 @@ contents.each do |row|
   legislators = legislators_by_zipcode(zipcode)
 
   form_letter = erb_template.result(binding)
-  # save_thank_you_letters(id, form_letter)
+  save_thank_you_letters(id, form_letter)
 end
 
-puts "Peak registration hour: #{peak_hour(regtime_hash)}"
+puts "Peak registration hour: #{peak(regtime_hash)}"
+puts "Peak registration day: #{peak(regday_hash)}"
