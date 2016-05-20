@@ -1,0 +1,17 @@
+--- !ruby/object:Hangman
+letter_bank:
+- e
+- a
+- u
+- b
+guesses_left: 1
+chosen_char: save
+secret_word: Orinoco
+show_char:
+- true
+- true
+- true
+- false
+- true
+- false
+- true

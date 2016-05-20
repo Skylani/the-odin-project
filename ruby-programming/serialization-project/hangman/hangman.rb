@@ -7,7 +7,7 @@ class Hangman
   def initialize
     words = generate_words
     @letter_bank = []
-    @guesses_left = TURNS + 1
+    @guesses_left = TURNS
     @chosen_char = ""
     @secret_word = words[rand words.length]
     @show_char = Array.new(@secret_word.length) { |i| false }
@@ -37,7 +37,28 @@ class Hangman
         save
         break
       end
+
+      update_result
+
     end
+  end
+
+  def update_result
+    correct_guess = false
+    i = 0
+    @secret_word.each_char do |c|
+      if c.downcase == @chosen_char
+        @show_char[i] = true
+        correct_guess = true
+      end
+      i += 1
+    end
+
+    unless correct_guess
+      @guesses_left -= 1
+      @letter_bank << @chosen_char unless @chosen_char == ""
+    end
+
   end
 
   def generate_words
@@ -47,30 +68,16 @@ class Hangman
   end
 
   def show_word
-    correct_guess = false
     i = 0
     @secret_word.each_char do |c|
       if @show_char[i]
         print "#{c} "
       else
-        if c.downcase == @chosen_char
-          print "#{c} "
-
-          @show_char[i] = true
-          correct_guess = true
-        else
-          print "_ "
-
-        end
+        print "_ "
       end
       i += 1
     end
     puts ""
-
-    unless correct_guess
-      @guesses_left -= 1
-      @letter_bank << @chosen_char unless @chosen_char == ""
-    end
   end
 
   def win?
@@ -105,7 +112,6 @@ def load
   index = gets.chomp
   game_file = "save_games/#{game_files[index.to_i]}"
   yaml = File.open(game_file).read
-  puts yaml
   YAML::load(yaml)
 
 end
