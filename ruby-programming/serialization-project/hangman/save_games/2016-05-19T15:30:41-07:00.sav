@@ -1,0 +1,17 @@
+--- !ruby/object:Hangman
+letter_bank:
+- e
+guesses_left: 4
+chosen_char: i
+secret_word: sociologic
+show_char:
+- false
+- false
+- false
+- true
+- false
+- false
+- false
+- false
+- true
+- false
