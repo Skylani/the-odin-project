@@ -14,9 +14,7 @@ class Hangman
   end
 
   def play
-
     loop do
-
       show_word
       puts "Letter bank: #{print_letter_bank}"
       puts "Guesses left: #{@guesses_left}\n\n"
@@ -29,17 +27,16 @@ class Hangman
         break
       end
 
-
       print "Guess: "
       @chosen_char = gets.chomp.downcase
 
+      # save game if user type 'save'
       if @chosen_char == 'save'
         save
         break
       end
 
       update_result
-
     end
   end
 
@@ -58,7 +55,6 @@ class Hangman
       @guesses_left -= 1
       @letter_bank << @chosen_char unless @chosen_char == ""
     end
-
   end
 
   def generate_words
@@ -90,8 +86,6 @@ class Hangman
 end
 
 
-
-
 def save
   yaml = YAML::dump(self)
   Dir.mkdir("save_games") unless Dir.exists? "save_games"
@@ -101,19 +95,18 @@ def save
 end
 
 def load
-
   # get all game files
   game_files = Dir.entries("save_games").select { |f| f.include?(".sav") }
   game_files.each_with_index do |filename, index|
     puts "[#{index}] #{filename}"
   end
 
+  # load requested game file
   print ": "
   index = gets.chomp
   game_file = "save_games/#{game_files[index.to_i]}"
   yaml = File.open(game_file).read
   YAML::load(yaml)
-
 end
 
 puts "[N]ew Game   [L]oad Game"
