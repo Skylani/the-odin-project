@@ -29,7 +29,6 @@ elsif input == 'g' || input == 'G'
   request = "GET #{path} HTTP/1.0\r\n\r\n"
 end
 
-  puts "request: #{request}"
 
   socket = TCPSocket.open(host,port)  # Connect to server
   socket.print(request)               # Send request
