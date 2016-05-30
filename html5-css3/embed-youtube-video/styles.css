@@ -52,33 +52,63 @@ table {
 html, body {
   background-color: #F1F1F1;
 }
-.float-left {
-  float: left;
-}
-.float-right {
-  float: right;
-}
 /* Navbar
 ------------------------------------*/
 nav {
-  position: absolute;
+  position: fixed;
   width: 100%;
   height: 55px;
   top: 0;
   background-color: white;
 }
+.logo-container {
+  float: left;
+  margin-top: 10px;
+  width: 40%;
+}
+.nav-content {
+  float: right;
+  width: 60%;
+}
+
+#masthead-search {
+  float: left;
+  position: relative;
+  top: 7px;
+  right: 100px;
+  background-color: #F1F1F1;
+  padding: 7px 10px 7px 50px;
+  background-image: url('img/search.png');
+  background-repeat: no-repeat;
+  background-position: 13px 10px;
+  width: 60%;
+}
+#masthead-search input {
+  border: none;
+  background-color: transparent;
+  height: 25px;
+  font-size: 14px;
+}
+.user-container {
+  float: right;
+  position: relative;
+  top: 7px;
+  right: 30px;
+}
 
 /* Content
 ------------------------------------*/
 .content {
-  margin-top: 68px;
+  margin: 68px auto 0;
+  width: 1012px;
+}
+
+.main {
+  float: left;
 }
 
 
 
-aside {
-  background-color: white;
-}
 
 
 /* Sidebar
@@ -86,4 +116,6 @@ aside {
 aside {
   width: 416px;
   height: 1000px;
+  background-color: #fff;
+  float: right;
 }
