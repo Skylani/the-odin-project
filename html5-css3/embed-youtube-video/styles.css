@@ -51,7 +51,14 @@ table {
 ------------------------------------*/
 html, body {
   background-color: #F1F1F1;
+  font-family: sans-serif;
 }
+
+/* Clearfix */
+.clearfix {
+  overflow: auto;
+}
+
 /* Navbar
 ------------------------------------*/
 nav {
@@ -107,6 +114,47 @@ nav {
   float: left;
 }
 
+#video {
+  margin-bottom: 10px;
+}
+
+/* video header */
+#video-header {
+  background-color: #fff;
+  padding: 10px;
+}
+#video-header p {
+  margin-bottom: 10px;
+}
+.author {
+  padding-bottom: 5px;
+  border-bottom: 2px solid #E2E2E2;
+}
+
+.author-info {
+  display: inline-block;
+}
+#views {
+  float: right;
+  position: relative;
+  top: 36px;
+  width: 150px;
+  text-align: right;
+  border-bottom: 2px solid #167AC6;
+}
+
+/* video buttons */
+#video-actions {
+  float: left;
+}
+#like-btns {
+  float: right;
+}
+
+#video-btns span {
+  margin-right: 20px;
+  font-size: 12px;
+}
 
 
 
@@ -115,7 +163,16 @@ nav {
 -------------------------------------*/
 aside {
   width: 416px;
-  height: 1000px;
   background-color: #fff;
   float: right;
+  padding: 10px;
+  box-sizing: border-box;
+}
+.list-video-item {
+  border-bottom: 1px solid #E2E2E2;
+  padding: 10px 0;
+}
+.list-video-item img {
+  float: left;
+  margin-right: 10px;
 }
