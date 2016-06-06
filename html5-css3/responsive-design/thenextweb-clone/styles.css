@@ -1,0 +1,271 @@
+/* General
+--------------------------------*/
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+html body {
+  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  box-sizing: border-box;
+}
+
+.float {
+  float: left;
+}
+
+/* Header
+--------------------------------*/
+
+/* Nav */
+nav {
+  color: #9A9A9A;
+}
+.nav-right {
+  float: right;
+}
+nav ul li {
+  display: inline-block;
+}
+.nav-info li:not(:last-child) {
+  padding-right: 10px;
+}
+
+.nav-info {
+  background-color: #000;
+  padding: 10px 20px;
+  font-size: 13px;
+}
+.nav-site {
+  text-transform: uppercase;
+  padding: 15px 20px;
+  font-size: 14px;
+  box-shadow: 0 50px 40px 20px #eee;
+}
+.nav-site li:not(:last-child) {
+  padding-right: 15px;
+}
+
+
+
+/* Headlines */
+.headlines {
+  width: 100%;
+  padding: 5px;
+  height: 580px;
+}
+.container {
+  padding: 5px;
+  width: 100%;
+  height: 100%;
+}
+.headline-left,
+.headline-right {
+  width: 50%;
+  height: 100%;
+  float: left;
+}
+.headlines article {
+  width: 100%;
+  height: 100%;
+}
+
+
+/* Cover */
+.cover-title {
+  font-size: 45px;
+}
+
+.logo-text {
+  font-size: 130px;
+  font-weight: bold;
+  float: left;
+  margin-left: 20px;
+}
+.article-date {
+  float: right;
+  margin-top: 20px;
+  margin-right: 20px;
+}
+
+
+
+#art-1 {
+  background-image: url(img/shutterstock_258044795_Mark-Zuckerberg-1200x600.jpg);
+}
+#art-2 {
+  background-image: url(img/Deal-with-it-Instagram-1.gif);
+}
+#art-3 {
+  background-image: url(img/ezgif.com-crop.gif);
+}
+#art-4 {
+  background-image: url(img/Microsoft-Surface-Lumia-Event-2015-12-1200x675.jpg);
+}
+article {
+  background-position: center center;
+  background-size: cover;
+}
+
+.headline-right .container {
+  width: 50%;
+  float: left;
+  height: 50%;
+}
+.headline-right .container:first-child {
+  width: 100%;
+}
+
+header article {
+  position: relative;
+  color: #fff;
+  text-shadow: 1px 1px 6px #666;
+}
+.article-info {
+  position: absolute;
+  bottom: 10px;
+  margin: 10px 15px;
+}
+.title {
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.headline-title {
+  font-size: 25px;
+}
+
+/* Page
+------------------------------*/
+.section-title {
+  font-size: 25px;
+  font-weight: bold;
+  color: #E8472E;
+  margin: 20px 10px;
+}
+.wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 10px;
+}
+.news article {
+  float: left;
+  width: 22%;
+  margin: 11px;
+}
+.news img {
+  width: 100%;
+}
+
+/* Footer
+------------------------------*/
+footer {
+  text-align: center;
+}
+
+/* Quote */
+.quote {
+  background-color: #F4F4F4;
+  padding: 30px;
+  width: 100%;
+}
+.quote-text {
+  color: #E8472E;
+  font-size: 53px;
+  font-weight: bold;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+/* Links */
+footer nav {
+  background-color: #101010;
+  height: 100px;
+  padding-top: 40px;
+}
+
+.footer-nav li:not(:last-child) {
+  padding-right: 10px;
+  font-size: 14px;
+}
+
+/* copyright */
+.copyright {
+  height: 90px;
+  background-color: #000;
+  color: #666;
+  padding-top: 35px;
+  font-size: 12px;
+}
+
+
+
+/* Responsive design
+------------------------------*/
+@media screen and (max-width: 1024px) {
+  .headlines {
+    height: 450px;
+  }
+  .headline-left,
+  .headline-right {
+    width: 100%;
+  }
+  .headlines .headline-left {
+    height: 55%;
+  }
+  .headlines .headline-right {
+    height: 45%;
+  }
+
+  .headline-right .container {
+    width: 33.3333%!important;
+    height: 100%;
+  }
+
+  .logo-text {
+    display: none;
+  }
+  .article-info {
+    margin-bottom: 5px;
+  }
+
+  /* font size */
+  .cover-title {
+    font-size: 35px;
+  }
+  .headline-title {
+    font-size: 18px;
+  }
+  .article-category {
+    font-size: 15px;
+  }
+
+  /* page */
+  .news article {
+    width: 30%;
+    margin: 11px;
+  }
+
+}
+@media screen and (max-width: 768px) {
+  .headlines .container {
+    height: 200px;
+    width: 100%!important;
+  }
+  /* font size */
+  .cover-title {
+    font-size: 18px;
+  }
+
+  .news article {
+    width: 100%;
+  }
+
+  .clear {
+    height: auto;
+  }
+}
+
+
+/* Clearfix */
+.clearfix {
+  overflow: auto;
+}
