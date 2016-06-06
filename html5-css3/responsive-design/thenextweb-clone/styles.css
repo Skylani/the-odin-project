@@ -152,8 +152,8 @@ header article {
 }
 .news article {
   float: left;
-  width: 22%;
-  margin: 11px;
+  width: 25%;
+  padding: 11px;
 }
 .news-img {
   width: 100%;
@@ -249,8 +249,7 @@ footer nav {
 
   /* page */
   .news article {
-    width: 30%;
-    margin: 11px;
+    width: 33%;
   }
 
 }
@@ -277,10 +276,10 @@ footer nav {
     width: 70px;
     height: 70px;
     float: left;
-    margin-right: 20px;
   }
   .news-title {
     margin-top: 0;
+    padding-left: 90px;
   }
 
 }
