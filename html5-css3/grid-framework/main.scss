@@ -1,0 +1,127 @@
+// General
+// =============================
+$img-font-color: #fff;
+$text-color: #484848;
+$light-gray: #AAA;
+$bg-gray: #EDEFED;
+
+html {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-color: $bg-gray;
+}
+
+
+
+
+// Grid related
+// ==============================
+.grid {
+  width: 1040px;
+}
+
+.module {
+  background-color: #fff;
+}
+
+
+// Header
+// ==============================
+header {
+  height: 590px;
+  background-color: #666;
+  color: $img-font-color;
+}
+
+// Navbar
+nav {
+  padding: 10px 20px;
+}
+.nav-tools {
+  float: right;
+
+  li {
+    display: inline-block;
+    padding-left: 30px;
+  }
+}
+
+// Tagline
+.tagline {
+  text-align: center;
+  margin-top: 120px;
+  .title {
+    text-transform: uppercase;
+    font-size: 60px;
+  }
+}
+
+// Page
+// =============================
+.page {
+  color: $text-color;
+
+  .title {
+    font-size: 25px;
+    font-weight: bold;
+  }
+}
+
+// hosting info
+.hosting-info {
+  background-color: #fff;
+  margin-top: 50px;
+  margin-bottom: 60px;
+  .title {
+    margin-top: 80px;
+    margin-bottom: 20px;
+  }
+  .description {
+    padding-bottom: 20px;
+  }
+}
+.hosting-text {
+  padding-right: 25px;
+  padding-left: 15px;
+}
+.btn {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 13px 0;
+  text-decoration: none;
+  border-radius: 3px;
+}
+.btn-host {
+  color: #fff;
+  text-transform: capitalize;
+  margin-bottom: 80px;
+  background-color: #006977;
+}
+
+.module {
+  height: 300px;
+  position: relative;
+  .tile{
+    overflow: auto;
+    margin: auto;
+    position: absolute;
+    top: 50%; left: 0; right: 0;
+  }
+}
+
+// Weekend Destinations
+.weekend-dest {
+  text-align: center;
+  .description {
+    margin: 15px auto 40px;
+  }
+  .btn-wk {
+    color: $text-color;
+    background-color: #fff;
+    border: 1px solid $light-gray;
+  }
+
+}
+
+// World Destinations
+// ==================================
