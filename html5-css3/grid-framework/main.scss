@@ -16,7 +16,7 @@ html {
 // Grid related
 // ==============================
 .grid {
-  width: 1040px;
+  max-width: 1040px;
 }
 
 .module {
@@ -48,10 +48,11 @@ nav {
 // Tagline
 .tagline {
   text-align: center;
-  margin-top: 120px;
+  margin-top: 150px;
   .title {
     text-transform: uppercase;
     font-size: 60px;
+    margin-bottom: 15px;
   }
 }
 
@@ -61,7 +62,7 @@ nav {
   color: $text-color;
 
   .title {
-    font-size: 25px;
+    font-size: 27px;
     font-weight: bold;
   }
 }
@@ -72,8 +73,8 @@ nav {
   margin-top: 50px;
   margin-bottom: 60px;
   .title {
-    margin-top: 80px;
-    margin-bottom: 20px;
+    padding-top: 80px;
+    padding-bottom: 20px;
   }
   .description {
     padding-bottom: 20px;
@@ -89,7 +90,7 @@ nav {
   text-align: center;
   padding: 13px 0;
   text-decoration: none;
-  border-radius: 3px;
+  border-radius: 2px;
 }
 .btn-host {
   color: #fff;
@@ -98,30 +99,39 @@ nav {
   background-color: #006977;
 }
 
-.module {
-  height: 300px;
+.tile {
+  height: 350px;
   position: relative;
-  .tile{
-    overflow: auto;
-    margin: auto;
+  .tile-content {
     position: absolute;
-    top: 50%; left: 0; right: 0;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    width: 100%;
+    text-align: center;
+  }
+}
+
+// Destinations
+// ===============================
+.dest-head {
+  text-align: center;
+  .description {
+    margin: 15px auto 40px;
   }
 }
 
 // Weekend Destinations
 .weekend-dest {
-  text-align: center;
-  .description {
-    margin: 15px auto 40px;
-  }
   .btn-wk {
     color: $text-color;
     background-color: #fff;
     border: 1px solid $light-gray;
+    margin-top: 40px;
+    margin-bottom: 30px;
   }
-
 }
 
 // World Destinations
-// ==================================
+.world-dest {
+  text-align: center;
+}

@@ -3,7 +3,7 @@ html {
   background-color: #EDEFED; }
 
 .grid {
-  width: 1040px; }
+  max-width: 1040px; }
 
 .module {
   background-color: #fff; }
@@ -24,15 +24,16 @@ nav {
 
 .tagline {
   text-align: center;
-  margin-top: 120px; }
+  margin-top: 150px; }
   .tagline .title {
     text-transform: uppercase;
-    font-size: 60px; }
+    font-size: 60px;
+    margin-bottom: 15px; }
 
 .page {
   color: #484848; }
   .page .title {
-    font-size: 25px;
+    font-size: 27px;
     font-weight: bold; }
 
 .hosting-info {
@@ -40,8 +41,8 @@ nav {
   margin-top: 50px;
   margin-bottom: 60px; }
   .hosting-info .title {
-    margin-top: 80px;
-    margin-bottom: 20px; }
+    padding-top: 80px;
+    padding-bottom: 20px; }
   .hosting-info .description {
     padding-bottom: 20px; }
 
@@ -55,7 +56,7 @@ nav {
   text-align: center;
   padding: 13px 0;
   text-decoration: none;
-  border-radius: 3px; }
+  border-radius: 2px; }
 
 .btn-host {
   color: #fff;
@@ -63,22 +64,28 @@ nav {
   margin-bottom: 80px;
   background-color: #006977; }
 
-.module {
-  height: 300px;
+.tile {
+  height: 350px;
   position: relative; }
-  .module .tile {
-    overflow: auto;
-    margin: auto;
+  .tile .tile-content {
     position: absolute;
     top: 50%;
-    left: 0;
-    right: 0; }
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    text-align: center; }
 
-.weekend-dest {
+.dest-head {
   text-align: center; }
-  .weekend-dest .description {
+  .dest-head .description {
     margin: 15px auto 40px; }
-  .weekend-dest .btn-wk {
-    color: #484848;
-    background-color: #fff;
-    border: 1px solid #AAA; }
+
+.weekend-dest .btn-wk {
+  color: #484848;
+  background-color: #fff;
+  border: 1px solid #AAA;
+  margin-top: 40px;
+  margin-bottom: 30px; }
+
+.world-dest {
+  text-align: center; }

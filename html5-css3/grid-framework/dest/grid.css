@@ -18,7 +18,8 @@
 
 [class^='col-'] {
   float: left;
-  padding-right: 24px; }
+  padding-right: 24px;
+  padding-bottom: 24px; }
   .grid [class^='col-']:last-of-type {
     margin-right: -24px; }
 
