@@ -10,9 +10,6 @@ html {
   background-color: $bg-gray;
 }
 
-
-
-
 // Grid related
 // ==============================
 .grid {
@@ -22,7 +19,6 @@ html {
 .module {
   background-color: #fff;
 }
-
 
 // Header
 // ==============================
@@ -71,7 +67,6 @@ nav {
 .hosting-info {
   background-color: #fff;
   margin-top: 50px;
-  margin-bottom: 60px;
   .title {
     padding-top: 80px;
     padding-bottom: 20px;
@@ -102,13 +97,13 @@ nav {
 .tile {
   height: 350px;
   position: relative;
-  .tile-content {
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%,-50%);
-    width: 100%;
-    text-align: center;
-  }
+}
+.tile-content {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  width: 100%;
+  text-align: center;
 }
 
 // Destinations
@@ -122,16 +117,70 @@ nav {
 
 // Weekend Destinations
 .weekend-dest {
-  .btn-wk {
-    color: $text-color;
-    background-color: #fff;
-    border: 1px solid $light-gray;
-    margin-top: 40px;
-    margin-bottom: 30px;
-  }
+  margin-top: 65px;
+}
+.btn-wk {
+  color: $text-color;
+  background-color: #fff;
+  border: 1px solid $light-gray;
+  margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 // World Destinations
 .world-dest {
   text-align: center;
+}
+
+
+// Responsive
+// ==================================
+@media screen and (max-width: 1100px) {
+  .grid {
+    width: 750px;
+  }
+  .full {
+    width: 100%;
+  }
+  .half {
+    width: 50%;
+  }
+  .hosting-text {
+    padding-right: 0;
+    .title {
+      font-size: 18px;
+    }
+    .description {
+      font-size: 16px;
+    }
+    .btn {
+      font-size: 13px;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .grid {
+    width: 100%;
+    padding: 0;
+  }
+  [class^='col-'] {
+    padding: 0;
+    width: 100%;
+  }
+  .row {
+    margin-right: 0;
+  }
+  .grid-btn {
+    display: none;
+  }
+
+  // host
+  .hosting-text {
+    text-align: center;
+    padding: 0 15px;
+  }
+  [class*='-dest'] {
+    margin-top: 65px;
+  }
 }

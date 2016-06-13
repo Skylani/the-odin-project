@@ -38,8 +38,7 @@ nav {
 
 .hosting-info {
   background-color: #fff;
-  margin-top: 50px;
-  margin-bottom: 60px; }
+  margin-top: 50px; }
   .hosting-info .title {
     padding-top: 80px;
     padding-bottom: 20px; }
@@ -67,25 +66,62 @@ nav {
 .tile {
   height: 350px;
   position: relative; }
-  .tile .tile-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100%;
-    text-align: center; }
+
+.tile-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  text-align: center; }
 
 .dest-head {
   text-align: center; }
   .dest-head .description {
     margin: 15px auto 40px; }
 
-.weekend-dest .btn-wk {
+.weekend-dest {
+  margin-top: 65px; }
+
+.btn-wk {
   color: #484848;
   background-color: #fff;
   border: 1px solid #AAA;
-  margin-top: 40px;
-  margin-bottom: 30px; }
+  margin-bottom: 20px;
+  margin-top: 20px; }
 
 .world-dest {
   text-align: center; }
+
+@media screen and (max-width: 1100px) {
+  .grid {
+    width: 750px; }
+  .full {
+    width: 100%; }
+  .half {
+    width: 50%; }
+  .hosting-text {
+    padding-right: 0; }
+    .hosting-text .title {
+      font-size: 18px; }
+    .hosting-text .description {
+      font-size: 16px; }
+    .hosting-text .btn {
+      font-size: 13px; } }
+
+@media screen and (max-width: 768px) {
+  .grid {
+    width: 100%;
+    padding: 0; }
+  [class^='col-'] {
+    padding: 0;
+    width: 100%; }
+  .row {
+    margin-right: 0; }
+  .grid-btn {
+    display: none; }
+  .hosting-text {
+    text-align: center;
+    padding: 0 15px; }
+  [class*='-dest'] {
+    margin-top: 65px; } }

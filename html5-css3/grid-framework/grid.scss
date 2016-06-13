@@ -7,7 +7,7 @@
 $pad: 24px;
 
 .grid {
-  margin: 0 auto $pad;
+  margin: 0 auto;
   padding-left: $pad;
   // clearfix
   &:after {
@@ -36,6 +36,11 @@ $pad: 24px;
   .grid &:last-of-type {
     margin-right: -$pad;
   }
+}
+
+.center {
+  float: none;
+  margin: 0 auto!important;
 }
 
 .col-1-2 {
