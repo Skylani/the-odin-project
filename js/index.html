@@ -10,7 +10,7 @@
 
 <div class="calculator">
   <div class="screen">
-
+    <p class="screen-text"></p>
   </div>
   <div class="left-panel">
     <div class="key key-num" id="7"><p>7</p></div>
@@ -33,6 +33,7 @@
     <div class="key key-op" id="sub"><p>-</p></div>
     <div class="key key-op" id="add"><p>+</p></div>
   </div>
+
 
 </div>
 
@@ -76,16 +77,19 @@
         }
 
         aStr += this.id;
-        console.log("a = " + aStr);
+        // console.log("a = " + aStr);
+        $('.screen-text').text(aStr);
       } else {
         bStr += this.id;
-        console.log("b = " + bStr);
+        // console.log("b = " + bStr);
+        $('.screen-text').text(bStr);
       }
     });
 
     $('.key-op').on('click', function(){
       if (this.id == 'clr') {
         aStr = "";
+        $('.screen-text').text(aStr);
       } else if (this.id == 'equal') {
 
         // only entered a

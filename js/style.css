@@ -59,10 +59,24 @@ html {
 
 
 .calculator {
-  height: 400px;
+  height: 500px;
   width: 400px;
+  background-color: #DBB92E;
+}
+
+/* screen */
+.screen {
+  height: 100px;
   background-color: #eee;
 }
+.screen p {
+  font-size: 40px;
+  text-align: right;
+  line-height: 100px;
+  padding: 0 20px;
+}
+
+
 .left-panel {
   float: left;
   font-size: 40px;
