@@ -43,8 +43,9 @@
   var currNum = 'a';
   var a = 0;
   var b = 0;
+  var result;
 
-  function add(a, b) {
+  function addition (a, b) {
     return a + b;
   }
   function multiply (a, b) {
@@ -55,6 +56,14 @@
   }
   function subtract (a, b) {
     return a - b;
+  }
+
+  function strToNum () {
+    // only parse a if start over (not using result as a)
+    if (a == 0) {
+      a = parseInt(aStr);
+    }
+    b = parseInt(bStr);
   }
 
   $(document).ready(function(){
@@ -75,11 +84,46 @@
         aStr = "";
       } else if (this.id == 'equal') {
 
+        // only entered a
+        if (bStr === "" && aStr !== "") {
+          strToNum();
+          result = a;
 
-        // reset variables
-        aStr = "";
-        bStr = "";
-      } else {
+        // entered a and b
+        } else if (bStr !== "") {
+          // convert str to num b4 calculation
+          strToNum();
+
+          // calculate
+          switch(op) {
+            case 'div':
+              result = divide(a, b);
+              break;
+
+            case 'mul':
+              result = multiply(a, b);
+              break;
+
+            case 'sub':
+              result = subtract(a, b);
+              break;
+
+            case 'add':
+              result = addition(a, b);
+          }
+
+          // reset variables
+          aStr = "";
+          bStr = "";
+          a = result;
+          currNum = 'a';
+        }
+
+        // didn't enter a and b => do nothing
+
+        console.log("result = " + result);
+      }
+      else {
         op = this.id;
         currNum = 'b';
       }
