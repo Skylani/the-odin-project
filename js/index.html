@@ -34,9 +34,7 @@
     <div class="key key-op" id="add"><p>+</p></div>
   </div>
 
-
 </div>
-
 
 <script>
   var aStr = "";
@@ -46,6 +44,7 @@
   var b = 0;
   var result;
   var clearA = false;
+  var op = "";
 
   function addition (a, b) {
     return a + b;
@@ -67,7 +66,6 @@
 
   $(document).ready(function(){
 
-
     $('.key-num').on('click', function(){
       if (currNum == 'a') {
         // clear a's string for a new calculation
@@ -77,24 +75,26 @@
         }
 
         aStr += this.id;
-        console.log("a = " + aStr);
         $('.screen-text').text(aStr);
       } else {
         bStr += this.id;
-        console.log("b = " + bStr);
         $('.screen-text').text(bStr);
       }
     });
 
     $('.key-op').on('click', function(){
       if (this.id == 'clr') {
-        aStr = "";
-        $('.screen-text').text(aStr);
-        currNum = 'a';
-      } else if (this.id == 'equal') {
+        $('.screen-text').text("");
 
+        // reset variables
+        aStr = "";
+        bStr = "";
+        currNum = 'a';
+
+      } else if (this.id == 'equal') {
         // only entered a
         if (bStr === "" && aStr !== "") {
+          // convert str to num b4 calculation
           strToNum();
           result = a;
 
@@ -124,25 +124,21 @@
           // reset variables
           aStr = result.toString();
           a = result;
+          bStr = "";
           currNum = 'a';
           clearA = true;
         }
 
-        // didn't enter a and b => do nothing
-
-        console.log("result = " + result);
         $('.screen-text').text(result);
       }
       else {
         op = this.id;
         currNum = 'b';
-        bStr = "";
       }
     });
 
   });
 
 </script>
-
 </body>
 </html>
