@@ -22,7 +22,7 @@
     <div class="key key-num" id="1"><p>1</p></div>
     <div class="key key-num" id="2"><p>2</p></div>
     <div class="key key-num" id="3"><p>3</p></div>
-    <div class="key key-num" id="dot"><p>.</p></div>
+    <div class="key key-num" id="."><p>.</p></div>
     <div class="key key-num" id="0"><p>0</p></div>
     <div class="key key-op" id="equal"><p>=</p></div>
   </div>
@@ -44,6 +44,7 @@
   var a = 0;
   var b = 0;
   var result;
+  var clearA = false;
 
   function addition (a, b) {
     return a + b;
@@ -59,11 +60,8 @@
   }
 
   function strToNum () {
-    // only parse a if start over (not using result as a)
-    if (a == 0) {
-      a = parseInt(aStr);
-    }
-    b = parseInt(bStr);
+    a = parseFloat(aStr);
+    b = parseFloat(bStr);
   }
 
   $(document).ready(function(){
@@ -71,6 +69,12 @@
 
     $('.key-num').on('click', function(){
       if (currNum == 'a') {
+        // clear a's string for a new calculation
+        if(clearA) {
+          aStr = "";
+          clearA = false;
+        }
+
         aStr += this.id;
         console.log("a = " + aStr);
       } else {
@@ -113,10 +117,11 @@
           }
 
           // reset variables
-          aStr = "";
+          aStr = result.toString();
           bStr = "";
           a = result;
           currNum = 'a';
+          clearA = true;
         }
 
         // didn't enter a and b => do nothing
