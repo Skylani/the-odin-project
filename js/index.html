@@ -38,9 +38,11 @@
 
 
 <script>
-  var a = "";
-  var b = "";
+  var aStr = "";
+  var bStr = "";
   var currNum = 'a';
+  var a = 0;
+  var b = 0;
 
   function add(a, b) {
     return a + b;
@@ -60,22 +62,23 @@
 
     $('.key-num').on('click', function(){
       if (currNum == 'a') {
-        a += this.id;
-        console.log("a = " + a);
+        aStr += this.id;
+        console.log("a = " + aStr);
       } else {
-        b += this.id;
-        console.log("b = " + b);
+        bStr += this.id;
+        console.log("b = " + bStr);
       }
     });
 
     $('.key-op').on('click', function(){
       if (this.id == 'clr') {
-        a = "";
+        aStr = "";
       } else if (this.id == 'equal') {
 
+
         // reset variables
-        a = "";
-        b = "";
+        aStr = "";
+        bStr = "";
       } else {
         op = this.id;
         currNum = 'b';
