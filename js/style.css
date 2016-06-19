@@ -63,7 +63,7 @@ html {
   width: 400px;
   background-color: #eee;
 }
-.numpad {
+.left-panel {
   float: left;
   font-size: 40px;
   width: 300px;
@@ -72,11 +72,11 @@ html {
   position: relative;
   float: left;
 }
-.numpad .key {
+.key-num {
   width: 100px;
   height: 100px;
 }
-.op .key {
+.key-op {
   width: 100px;
   height: 80px;
 }
@@ -86,7 +86,7 @@ html {
   left: 50%;
   transform: translate(-50%,-50%);
 }
-.op {
+.right-panel {
   float: right;
   font-size: 25px;
   width: 100px;

@@ -12,32 +12,36 @@
   <div class="screen">
 
   </div>
-  <div class="numpad">
-    <div class="key" id="7"><p>7</p></div>
-    <div class="key" id="8"><p>8</p></div>
-    <div class="key" id="9"><p>9</p></div>
-    <div class="key" id="4"><p>4</p></div>
-    <div class="key" id="5"><p>5</p></div>
-    <div class="key" id="6"><p>6</p></div>
-    <div class="key" id="1"><p>1</p></div>
-    <div class="key" id="2"><p>2</p></div>
-    <div class="key" id="3"><p>3</p></div>
-    <div class="key" id="dot"><p>.</p></div>
-    <div class="key" id="0"><p>0</p></div>
-    <div class="key" id="equal"><p>=</p></div>
+  <div class="left-panel">
+    <div class="key key-num" id="7"><p>7</p></div>
+    <div class="key key-num" id="8"><p>8</p></div>
+    <div class="key key-num" id="9"><p>9</p></div>
+    <div class="key key-num" id="4"><p>4</p></div>
+    <div class="key key-num" id="5"><p>5</p></div>
+    <div class="key key-num" id="6"><p>6</p></div>
+    <div class="key key-num" id="1"><p>1</p></div>
+    <div class="key key-num" id="2"><p>2</p></div>
+    <div class="key key-num" id="3"><p>3</p></div>
+    <div class="key key-num" id="dot"><p>.</p></div>
+    <div class="key key-num" id="0"><p>0</p></div>
+    <div class="key key-op" id="equal"><p>=</p></div>
   </div>
-  <div class="op">
-    <div class="key" id="clear"><p>Clear</p></div>
-    <div class="key" id="div"><p>/</p></div>
-    <div class="key" id="mul"><p>*</p></div>
-    <div class="key" id="sub"><p>-</p></div>
-    <div class="key" id="add"><p>+</p></div>
+  <div class="right-panel">
+    <div class="key key-op" id="clr"><p>Clear</p></div>
+    <div class="key key-op" id="div"><p>/</p></div>
+    <div class="key key-op" id="mul"><p>*</p></div>
+    <div class="key key-op" id="sub"><p>-</p></div>
+    <div class="key key-op" id="add"><p>+</p></div>
   </div>
 
 </div>
 
 
 <script>
+  var a = "";
+  var b = "";
+  var currNum = 'a';
+
   function add(a, b) {
     return a + b;
   }
@@ -53,8 +57,29 @@
 
   $(document).ready(function(){
 
-    $('.key').on('click', function(){
-      console.log(this.id);
+
+    $('.key-num').on('click', function(){
+      if (currNum == 'a') {
+        a += this.id;
+        console.log("a = " + a);
+      } else {
+        b += this.id;
+        console.log("b = " + b);
+      }
+    });
+
+    $('.key-op').on('click', function(){
+      if (this.id == 'clr') {
+        a = "";
+      } else if (this.id == 'equal') {
+
+        // reset variables
+        a = "";
+        b = "";
+      } else {
+        op = this.id;
+        currNum = 'b';
+      }
     });
 
   });
