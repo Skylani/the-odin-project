@@ -77,11 +77,11 @@
         }
 
         aStr += this.id;
-        // console.log("a = " + aStr);
+        console.log("a = " + aStr);
         $('.screen-text').text(aStr);
       } else {
         bStr += this.id;
-        // console.log("b = " + bStr);
+        console.log("b = " + bStr);
         $('.screen-text').text(bStr);
       }
     });
@@ -90,6 +90,7 @@
       if (this.id == 'clr') {
         aStr = "";
         $('.screen-text').text(aStr);
+        currNum = 'a';
       } else if (this.id == 'equal') {
 
         // only entered a
@@ -122,7 +123,6 @@
 
           // reset variables
           aStr = result.toString();
-          bStr = "";
           a = result;
           currNum = 'a';
           clearA = true;
@@ -131,10 +131,12 @@
         // didn't enter a and b => do nothing
 
         console.log("result = " + result);
+        $('.screen-text').text(result);
       }
       else {
         op = this.id;
         currNum = 'b';
+        bStr = "";
       }
     });
 
