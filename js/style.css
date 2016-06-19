@@ -86,11 +86,11 @@ html {
   position: relative;
   float: left;
 }
-.key-num {
+.left-panel .key {
   width: 100px;
   height: 100px;
 }
-.key-op {
+.right-panel .key {
   width: 100px;
   height: 80px;
 }
