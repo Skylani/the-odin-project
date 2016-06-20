@@ -22,6 +22,7 @@ html {
 .screen {
   height: 100px;
   background-color: #eee;
+  overflow: auto;
 }
 .screen p {
   font-size: 40px;
@@ -39,7 +40,12 @@ html {
 .key {
   position: relative;
   float: left;
+  transition: background-color 0.3s ease;
 }
+.key:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
 .left-panel .key {
   width: 100px;
   height: 100px;
