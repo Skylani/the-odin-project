@@ -8,34 +8,41 @@
 </head>
 <body>
 
-<div class="calculator">
-  <div class="screen">
-    <p class="screen-text"></p>
-  </div>
-  <div class="left-panel">
-    <div class="key key-num" id="7"><p>7</p></div>
-    <div class="key key-num" id="8"><p>8</p></div>
-    <div class="key key-num" id="9"><p>9</p></div>
-    <div class="key key-num" id="4"><p>4</p></div>
-    <div class="key key-num" id="5"><p>5</p></div>
-    <div class="key key-num" id="6"><p>6</p></div>
-    <div class="key key-num" id="1"><p>1</p></div>
-    <div class="key key-num" id="2"><p>2</p></div>
-    <div class="key key-num" id="3"><p>3</p></div>
-    <div class="key key-num" id="."><p>.</p></div>
-    <div class="key key-num" id="0"><p>0</p></div>
-    <div class="key key-sign" id="sign"><p>+/-</p></div>
-  </div>
-  <div class="right-panel">
-    <div class="key" id="clr"><p>Clear</p></div>
-    <div class="key key-op" id="div"><p>/</p></div>
-    <div class="key key-op" id="mul"><p>*</p></div>
-    <div class="key key-op" id="sub"><p>-</p></div>
-    <div class="key key-op" id="add"><p>+</p></div>
-    <div class="key" id="equal"><p>=</p></div>
+<div class="container">
+  <div class="calculator">
+    <div class="screen">
+      <p class="screen-text"></p>
+    </div>
+    <div class="left-panel">
+      <div class="key key-num" id="7"><p>7</p></div>
+      <div class="key key-num" id="8"><p>8</p></div>
+      <div class="key key-num" id="9"><p>9</p></div>
+      <div class="key key-num" id="4"><p>4</p></div>
+      <div class="key key-num" id="5"><p>5</p></div>
+      <div class="key key-num" id="6"><p>6</p></div>
+      <div class="key key-num" id="1"><p>1</p></div>
+      <div class="key key-num" id="2"><p>2</p></div>
+      <div class="key key-num" id="3"><p>3</p></div>
+      <div class="key key-num" id="."><p>.</p></div>
+      <div class="key key-num" id="0"><p>0</p></div>
+      <div class="key key-sign" id="sign"><p>+/-</p></div>
+    </div>
+    <div class="right-panel">
+      <div class="key" id="clr"><p>Clear</p></div>
+      <div class="key key-op" id="div"><p>/</p></div>
+      <div class="key key-op" id="mul"><p>*</p></div>
+      <div class="key key-op" id="sub"><p>-</p></div>
+      <div class="key key-op" id="add"><p>+</p></div>
+      <div class="key" id="equal"><p>=</p></div>
+    </div>
   </div>
 
+<footer>
+  <p><a href="">Javascript calculator created by <a href="https://github.com/laniywh">@laniywh</a></p>
+</footer>
+
 </div>
+
 
 <script>
   var aStr = "";
@@ -66,7 +73,6 @@
   }
 
   function calc () {
-
     // convert str to num b4 calculation
     strToNum();
 
