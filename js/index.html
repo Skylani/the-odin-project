@@ -67,20 +67,24 @@
 
   $(document).ready(function(){
 
+    // click on a number
     $('.key-num').on('click', function(){
-      if (currNum == 'a') {
-        // clear a's string for a new calculation
-        if(clearA) {
-          aStr = "";
-          clearA = false;
-        }
+      // clear a's string for a new calculation
+      if (currNum == 'a' && clearA) {
+        aStr = "";
+        clearA = false;
       }
 
+      // append digit to current number
       window[currNum + 'Str'] += this.id;
+
+      // update screen
       $('.screen-text').text(window[currNum + 'Str']);
     });
 
+    // click on 'Clear'
     $('#clr').on('click', function(){
+      // clear screen
       $('.screen-text').text("");
 
       // reset variables
@@ -89,14 +93,13 @@
       currNum = 'a';
     });
 
+    // click on '='
     $('#equal').on('click', function(){
-      // only entered a
+      // show a if only entered a
       if (bStr === "" && aStr !== "") {
-        // convert str to num b4 calculation
-        strToNum();
-        result = a;
+        result = aStr;
 
-      // entered a and b
+      // calculate if entered a and b
       } else if (bStr !== "") {
         // convert str to num b4 calculation
         strToNum();
@@ -121,20 +124,23 @@
 
         // reset variables
         aStr = result.toString();
-        a = result;
         bStr = "";
+        a = result;
       }
       currNum = 'a';
       clearA = true;
 
+      // show result on screen
       $('.screen-text').text(result);
     });
 
+    // click on operand
     $('.key-op').on('click', function(){
       op = this.id;
       currNum = 'b';
     });
 
+    // click on sign
     $('#sign').on('click', function() {
       if(window[currNum + 'Str'][0] == '-')
         window[currNum + 'Str']= window[currNum + 'Str'].slice(1, window[currNum + 'Str'].length);
