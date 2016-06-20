@@ -136,8 +136,10 @@
 
     // click on operand
     $('.key-op').on('click', function(){
-      op = this.id;
-      currNum = 'b';
+      if(aStr !== "") {
+        op = this.id;
+        currNum = 'b';
+      }
     });
 
     // click on sign
