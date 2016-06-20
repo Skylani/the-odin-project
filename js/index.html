@@ -65,6 +65,41 @@
     b = parseFloat(bStr);
   }
 
+  function calc () {
+
+    // convert str to num b4 calculation
+    strToNum();
+
+    // calculate
+    switch(op) {
+      case 'div':
+        result = divide(a, b);
+        break;
+
+      case 'mul':
+        result = multiply(a, b);
+        break;
+
+      case 'sub':
+        result = subtract(a, b);
+        break;
+
+      case 'add':
+        result = addition(a, b);
+    }
+
+    // reset variables
+    aStr = result.toString();
+    bStr = "";
+    a = result;
+  }
+
+  // focus back on number a after equal
+  function equalReset () {
+    currNum = 'a';
+    clearA = true;
+  }
+
   $(document).ready(function(){
 
     // click on a number
@@ -101,34 +136,11 @@
 
       // calculate if entered a and b
       } else if (bStr !== "") {
-        // convert str to num b4 calculation
-        strToNum();
-
-        // calculate
-        switch(op) {
-          case 'div':
-            result = divide(a, b);
-            break;
-
-          case 'mul':
-            result = multiply(a, b);
-            break;
-
-          case 'sub':
-            result = subtract(a, b);
-            break;
-
-          case 'add':
-            result = addition(a, b);
-        }
-
-        // reset variables
-        aStr = result.toString();
-        bStr = "";
-        a = result;
+        calc();
       }
-      currNum = 'a';
-      clearA = true;
+
+      // focus back on number a after equal
+      equalReset();
 
       // show result on screen
       $('.screen-text').text(result);
@@ -136,7 +148,18 @@
 
     // click on operand
     $('.key-op').on('click', function(){
+      // don't register op when no number entered
       if(aStr !== "") {
+        // second operation act as equal, e.g. 1+1+
+        if(currNum == 'b') {
+          calc();
+          equalReset();
+
+          // show result on screen
+          $('.screen-text').text(result);
+        }
+
+        // focus on number b
         op = this.id;
         currNum = 'b';
       }
