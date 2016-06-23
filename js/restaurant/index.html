@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Restaurant</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="content">
+
+  </div>
+
+  <script>
+  // tabs
+  var header= "<header><ul><li id='home' class='active'>Home</li><li id='menu'>Menu</li><li id='contact'>Contact</li></ul></header>";
+  $("#content").append(header);
+
+  $("#content").append("<section class='dynamic-content'></section>");
+
+  // image
+  var imgHome = "<img id='img-home' src='img/restaurant.jpg'>";
+  var imgMenu= "<img id='img-home' src='img/menu.jpg'>";
+  var imgContact= "<img id='img-home' src='img/contact.jpg'>";
+
+  // text
+  var textHome = "<h1 id='text-home'>Welcome to Bistro</h1>";
+  var textMenu = "<h1 id='text-menu'>Menu</h1>";
+  var textContact = "<h1 id='text-contact'>Contact Us</h1>";
+
+  var currPage = "home";
+
+  $(document).ready(function(){
+    $(".dynamic-content").append(imgHome);
+    $(".dynamic-content").append(textHome);
+
+    $("li").on('click', function(){
+      if (this.id != currPage) {
+        $("li").removeClass("active");
+        $(this).addClass('active');
+        $(".dynamic-content").children().hide();
+        switch (this.id) {
+          case "home":
+            $(".dynamic-content").append(imgHome);
+            $(".dynamic-content").append(textHome);
+            currPage = "home";
+            break;
+          case "menu":
+            $(".dynamic-content").append(imgMenu);
+            $(".dynamic-content").append(textMenu);
+            currPage = "menu";
+            break;
+          case "contact":
+            $(".dynamic-content").append(imgContact);
+            $(".dynamic-content").append(textContact);
+            currPage = "contact";
+        }
+      }
+    });
+
+
+  });
+  </script>
+</body>
+</html>

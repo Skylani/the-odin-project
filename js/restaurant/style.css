@@ -1,0 +1,28 @@
+#content {
+  width: 700px;
+  margin: 0 auto;
+}
+.dynamic-content {
+  text-align: right;
+}
+
+header {
+  text-align: center;
+  font-size: 20px;
+  margin: 50px;
+}
+
+li {
+  display: inline;
+  list-style: none;
+  padding-right: 40px;
+  cursor: pointer;
+}
+
+.active {
+  font-weight: bold;
+}
+
+img {
+  width: 100%;
+}
