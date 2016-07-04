@@ -1,0 +1,23 @@
+$black: #363533;
+$squareWidth: 20px;
+$sqPerRow: 40;
+
+// grid
+.grid {
+  border: 2px solid $black;
+  width: calc(#{$squareWidth} * #{$sqPerRow});
+}
+.grid:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.square {
+  width: $squareWidth;
+  height: $squareWidth;
+  float: left;
+
+}
+.clear {
+  clear: both;
+}

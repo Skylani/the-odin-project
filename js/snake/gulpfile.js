@@ -18,7 +18,7 @@ gulp.task('styles', function() {
     gulp.src('*.scss')
     .pipe(sass({
         styles: 'expanded'
-    }))//.on('error', errorlog)
+    })).on('error', errorlog)
     .pipe(postcss(processors))
     .pipe(gulp.dest('./'))
     .pipe(browserSync.stream());
