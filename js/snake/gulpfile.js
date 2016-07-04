@@ -18,7 +18,7 @@ gulp.task('styles', function() {
     gulp.src('*.scss')
     .pipe(sass({
         styles: 'expanded'
-    })).on('error', errorlog)
+    }))//.on('error', errorlog)
     .pipe(postcss(processors))
     .pipe(gulp.dest('./'))
     .pipe(browserSync.stream());
@@ -35,4 +35,4 @@ gulp.task('watch', function() {
     gulp.watch('*.html').on("change", reload);
 });
 
-gulp.task('default', ['styles', 'jekyll', 'watch']);
+gulp.task('default', ['styles', 'watch']);
