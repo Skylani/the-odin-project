@@ -4,7 +4,6 @@ var gridHeight = 30;
 var square = '<div class="square"></div>';
 var squareClr = '<div class="square clear"></div>';
 var container = $('.grid');
-var iSnake = 20;
 
 var grid = {
   init: function() {
@@ -16,20 +15,32 @@ var grid = {
       }
     }
 
-    grid.initSnake();
-  },
+    snake.init();
 
-  initSnake: function() {
-    snakeHead = container.children().eq(500);
-    snakeHead.css({
-      'border-radius': '10px',
-      'background-color': 'red',
+    $(document).keydown(function(e) {
+      console.log(e.which);
     });
-  }
+  },
 
 };
 
 var snake = {
+  posX: 20,
+  posY: 20,
+  direction: 'r',
+  parts: [],
+
+  init: function() {
+    parts = [snake.posX, snake.posY];
+    snakeHead = container.children().eq(snake.headPos());
+    snakeHead.css({
+      'background-color': 'red',
+    });
+  },
+
+  headPos: function() {
+    return gridWidth * (snake.posY - 1) + snake.posX;
+  },
 
 };
 

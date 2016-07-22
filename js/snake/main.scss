@@ -7,6 +7,7 @@ $sqPerRow: 40;
   border: 2px solid $black;
   width: calc(#{$squareWidth} * #{$sqPerRow});
 }
+// clearfix
 .grid:after {
   content: "";
   display: table;
@@ -17,7 +18,4 @@ $sqPerRow: 40;
   height: $squareWidth;
   float: left;
 
-}
-.clear {
-  clear: both;
 }
