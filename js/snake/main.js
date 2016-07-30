@@ -4,6 +4,7 @@ var gridHeight = 30;
 var square = '<div class="square"></div>';
 var squareClr = '<div class="square clear"></div>';
 var container = $('.grid');
+var squareClass = $('.square');
 
 var grid = {
   init: function() {
@@ -21,26 +22,23 @@ var grid = {
 };
 
 var snake = {
-  posX: 20,
-  posY: 20,
   direction: 'r',
   parts: [],
   length: 0,
+
   // move snake in current direction ev speed ms
-  run : setInterval(function() {snake.move()}, 1000),
+  run : setInterval(function() {snake.move();}, 300),
 
   init: function() {
-    snake.parts = [[snake.posX, snake.posY], [19,20], [18,20], [17,20], [16,20]];
-    snake.length = 5;
+    snake.parts = [[3,1], [2,1], [1,1]];
+    snake.length = 3;
 
-    // draw snake
-    for (var i = 0; i < length; i++) {
-      part = container.children().eq(snake.pos(snake.parts[4]));
-      part.css({
-        'background-color': 'red',
-      });
+    // draw initial snake
+    for (var i = 0; i < snake.length; i++) {
+      var nthChild = snake.pos(snake.parts[i]);
+      part = container.children().eq(nthChild);
+      part.css("background-color", "red");
     }
-
 
     $(document).keydown(function(e) {
       console.log(e.which);
@@ -140,10 +138,12 @@ var snake = {
         break;
     }
 
+    console.log("checking new head");
     // check if new head valid
-    if (snake.badHead(newHead)) {
+    if (snake.badMove(newHead)) {
       console.log('Game Over!');
       clearInterval(snake.run); // stop loop
+      return;
     }
 
     // add new head
@@ -152,15 +152,16 @@ var snake = {
     // remove tail
     snake.parts.pop();
 
+    console.log("updating new head");
     // update interface
     snake.update(newHead, oldTail);
 
   },
 
-  badHead: function(head) {
+  badMove: function(head) {
     // out of grid
-    // TODO: fix
-    if (snake.posX > gridWidth || snake.posX < 1 || snake.posY > gridHeight || snake.posY < 1) {
+    if (head[0] > gridWidth || head[0] < 1 || head[1] > gridHeight || head[1] < 1) {
+      console.log(`coord: ${head[0]}, ${head[1]}`);
       return true;
     }
 
@@ -212,7 +213,7 @@ var snake = {
   },
 
   pos: function(coord) {
-    return gridWidth * (coord[1] - 1) + coord[0];
+    return gridWidth * (coord[1] - 1) + coord[0] - 1;
   },
 
 };
