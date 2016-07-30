@@ -41,7 +41,6 @@ var snake = {
     }
 
     $(document).keydown(function(e) {
-      console.log(e.which);
       switch (e.which) {
         case 39:
           if (!snake.overlap('r')) {
@@ -67,9 +66,9 @@ var snake = {
           }
           break;
 
-        case 32:
-          clearInterval(snake.run); // stop loop
-          break;
+        // case 32:
+        //   clearInterval(snake.run); // stop loop
+        //   break;
 
         default:
       }
@@ -78,32 +77,14 @@ var snake = {
 
   },
 
-  // check if new head will overlap its second part
+  // Check if new head will overlap its second part
+  // Prevent snake from going in the opposite direction
   overlap: function(direction) {
-    var newHead = null;
     if (snake.length < 2)
       return false;
 
     head = snake.parts[0];
-
-    switch (direction) {
-      case 'r':
-        newHead = [head[0]+1,head[1]];
-        break;
-      case 'l':
-        newHead = [head[0]-1,head[1]];
-        break;
-      case 'u':
-        newHead = [head[0],head[1]-1];
-        break;
-      case 'd':
-        newHead = [head[0],head[1]+1];
-        break;
-    }
-
-    // debug
-    // console.log(`head:${head}`);
-    // console.log(`2nd:${snake.parts[1]}`);
+    var newHead = snake.getNewHeadCoord(direction);
 
     if (newHead[0] == snake.parts[1][0] && newHead[1] == snake.parts[1][1]) {
       return true;
@@ -112,15 +93,12 @@ var snake = {
     }
   },
 
-
-  // update parts of snake after one move
-  move: function() {
+  // Return new head coordinate based on the direction
+  getNewHeadCoord: function(direction) {
     var oldHead = snake.parts[0];
-    var oldTail = snake.parts[snake.length-1];
     var newHead = null;
 
-    // create new head
-    switch (snake.direction) {
+    switch (direction) {
       case 'r':
         newHead = [oldHead[0]+1, oldHead[1]];
         break;
@@ -138,7 +116,15 @@ var snake = {
         break;
     }
 
-    console.log("checking new head");
+    return newHead;
+  },
+
+
+  // update parts of snake after one move
+  move: function() {
+    var oldTail = snake.parts[snake.length-1];
+    var newHead = snake.getNewHeadCoord(snake.direction);
+
     // check if new head valid
     if (snake.badMove(newHead)) {
       console.log('Game Over!');
@@ -152,10 +138,8 @@ var snake = {
     // remove tail
     snake.parts.pop();
 
-    console.log("updating new head");
     // update interface
     snake.update(newHead, oldTail);
-
   },
 
   badMove: function(head) {
