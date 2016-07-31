@@ -1,6 +1,6 @@
 
-var gridWidth = 40;
-var gridHeight = 30;
+var gridWidth = 30;
+var gridHeight = 20;
 var square = '<div class="square"></div>';
 var squareClr = '<div class="square clear"></div>';
 var container = $('.grid');
@@ -13,9 +13,10 @@ $(document).ready(function() {
     var direction = 'r';
     var parts = [[3,1], [2,1], [1,1]];
     var length = 3;
+    var food;
 
     // move snake in current direction ev speed ms
-    var run = setInterval(function() {move();}, 1000);
+    var run = setInterval(function() {move();}, 300);
 
     var init = function() {
 
@@ -26,6 +27,8 @@ $(document).ready(function() {
         part.css("background-color", "red");
       }
 
+      generateFood();
+
       $(document).keydown(function(e) {
         switch (e.which) {
           case 39:
@@ -34,8 +37,7 @@ $(document).ready(function() {
             }
             break;
 
-          case 40:;
-
+          case 40:
             if (!overlap('d')) {
               direction = 'd';
             }
@@ -68,7 +70,10 @@ $(document).ready(function() {
     var generateFood = function() {
       var nthChild = Math.floor(Math.random() * gridWidth * gridHeight);
 
+      foodDiv = container.children().eq(nthChild);
+      foodDiv.css("background-color", "green");
 
+      food = coord(nthChild + 1);
     };
 
     // Check if new head will overlap its second part
@@ -121,7 +126,6 @@ $(document).ready(function() {
 
     // update parts of snake after one move
     var move = function() {
-      var oldTail = parts[length-1];
       var newHead = getNewHeadCoord(direction);
       // console.log('newhead:'+newHead[0]+','+newHead[1]);
       // console.log('parts:'+parts[0][0]+' '+parts[0][1]+','+parts[1][0]+' '+parts[1][1]+','+parts[2][0]+' '+parts[2][1]);
@@ -133,26 +137,52 @@ $(document).ready(function() {
         return;
       }
 
+      // update snake
+      update(newHead);
+
+    };
+
+    // update snake
+    var update = function(head) {
+      var oldTail = parts[length-1];
+
       // add new head
-      parts.unshift(newHead);
+      parts.unshift(head);
+      dot = container.children().eq(pos(head));
+      dot.css({
+        'background-color': 'red',
+      });
 
-      // remove tail
-      parts.pop();
+      if (eatFood(head)) {
+        length++;
+        generateFood();
+      } else {
+        // remove tail
+        parts.pop();
+        dot = container.children().eq(pos(oldTail));
+        dot.css({
+          'background-color': 'white',
+        });
+      }
+    };
 
-      // update interface
-      update(newHead, oldTail);
+    // return true if eat food, else false
+    var eatFood = function(newHead) {
+      if (comparePart(newHead, food)) {
+        return true;
+      } else {
+        return false;
+      }
     };
 
     var badMove = function(head) {
       // out of grid
       if (head[0] > gridWidth || head[0] < 1 || head[1] > gridHeight || head[1] < 1) {
-        console.log(`coord: ${head[0]}, ${head[1]}`);
         return true;
       }
 
       // hit itself (5th part and beyond)
       if (findPart(head)) {
-        console.log('hit');
         return true;
       }
 
@@ -182,23 +212,20 @@ $(document).ready(function() {
       return false;
     };
 
-    // update snake
-    var update = function(head, tail) {
-      // add head
-      dot = container.children().eq(pos(head));
-      dot.css({
-        'background-color': 'red',
-      });
 
-      // remove tail
-      dot = container.children().eq(pos(tail));
-      dot.css({
-        'background-color': 'white',
-      });
-    };
-
+    // return position (starting from 0) of a coordinate
     var pos = function(coord) {
       return gridWidth * (coord[1] - 1) + coord[0] - 1;
+    };
+
+    // return coordinate of a position (starting from 1)
+    var coord = function(pos) {
+      // not at last column
+      if (pos % gridWidth) {
+        return [pos % gridWidth, Math.floor(pos / gridWidth) + 1];
+      } else {
+        return [gridWidth, Math.floor(pos / gridWidth)];
+      }
     };
 
     return {

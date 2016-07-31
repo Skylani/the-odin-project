@@ -1,6 +1,6 @@
 .grid {
   border: 2px solid #363533;
-  width: calc(20px * 40); }
+  width: calc(20px * 30); }
 
 .grid:after {
   content: "";
