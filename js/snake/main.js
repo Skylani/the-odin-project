@@ -6,7 +6,6 @@ var squareClr = '<div class="square clear"></div>';
 var container = $('.grid');
 var squareClass = $('.square');
 
-
 $(document).ready(function() {
 
   var snake = (function() {
@@ -63,17 +62,12 @@ $(document).ready(function() {
             }
             break;
 
-          // case 32:
-          //   clearInterval(snake.run); // stop loop
-          //   break;
-
           default:
         }
 
       });
 
     };
-
 
     var generateFood = function() {
       var nthChild;
@@ -118,7 +112,6 @@ $(document).ready(function() {
       }
     };
 
-    // TODO: fix new head not updated
     // Return new head coordinate based on the direction
     var getNewHeadCoord = function(d) {
       var oldHead = parts[0];
@@ -142,10 +135,6 @@ $(document).ready(function() {
           break;
       }
 
-      // debug
-      // console.log(`oldhead: ${oldHead}`);
-      // console.log(`newhead: ${newHead}`);
-
       return newHead;
     };
 
@@ -153,8 +142,6 @@ $(document).ready(function() {
     // update parts of snake after one move
     var move = function() {
       var newHead = getNewHeadCoord(direction);
-      // console.log('newhead:'+newHead[0]+','+newHead[1]);
-      // console.log('parts:'+parts[0][0]+' '+parts[0][1]+','+parts[1][0]+' '+parts[1][1]+','+parts[2][0]+' '+parts[2][1]);
 
       // check if new head valid
       if (badMove(newHead)) {
