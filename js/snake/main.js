@@ -14,9 +14,10 @@ $(document).ready(function() {
     var parts = [[3,1], [2,1], [1,1]];
     var length = 3;
     var food;
+    var speed = 300;
 
     // move snake in current direction ev speed ms
-    var run = setInterval(function() {move();}, 300);
+    var run = setInterval(function() {move();}, speed);
 
     var init = function() {
 
@@ -68,12 +69,30 @@ $(document).ready(function() {
 
 
     var generateFood = function() {
-      var nthChild = Math.floor(Math.random() * gridWidth * gridHeight);
+      var nthChild;
+
+      do {
+        // random num from 0 to gridWidth * gridHeight
+        nthChild = Math.floor(Math.random() * gridWidth * gridHeight);
+      } while (foodOnSnake(nthChild + 1));
 
       foodDiv = container.children().eq(nthChild);
       foodDiv.css("background-color", "green");
 
       food = coord(nthChild + 1);
+    };
+
+    // return true if food is on the snake, else false
+    var foodOnSnake = function(nthChild) {
+      var foodCoord = coord(nthChild);
+
+      for (var i = 0; i < length; i++) {
+        if (compareCoord(parts[i], foodCoord)) {
+          return true;
+        }
+      }
+
+      return false;
     };
 
     // Check if new head will overlap its second part
@@ -149,26 +168,28 @@ $(document).ready(function() {
       // add new head
       parts.unshift(head);
       dot = container.children().eq(pos(head));
-      dot.css({
-        'background-color': 'red',
-      });
+      dot.css('background-color', 'red');
 
       if (eatFood(head)) {
         length++;
         generateFood();
+
+        // increase speed
+        speed = speed * (1 - 0.05);
+        console.log(`speed: ${speed}`);
+        clearInterval(run); // stop loop
+        run = setInterval(function() {move();}, speed);
       } else {
         // remove tail
         parts.pop();
         dot = container.children().eq(pos(oldTail));
-        dot.css({
-          'background-color': 'white',
-        });
+        dot.css('background-color', 'white');
       }
     };
 
     // return true if eat food, else false
     var eatFood = function(newHead) {
-      if (comparePart(newHead, food)) {
+      if (compareCoord(newHead, food)) {
         return true;
       } else {
         return false;
@@ -194,7 +215,7 @@ $(document).ready(function() {
     var findPart = function(coord) {
       // can only hit 3rd and beyond
       for (var i = 3; i < length; i++) {
-        if (comparePart(coord, parts[i])) {
+        if (compareCoord(coord, parts[i])) {
           return true;
         }
       }
@@ -202,9 +223,8 @@ $(document).ready(function() {
       return false;
     };
 
-    // return true if same
-    // else false
-    var comparePart = function(coord1, coord2) {
+    // return true if same coordinate, else false
+    var compareCoord = function(coord1, coord2) {
       if (coord1[0] == coord2[0] && coord1[1] == coord2[1]) {
         return true;
       }
