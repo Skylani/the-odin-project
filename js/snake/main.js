@@ -16,10 +16,17 @@ $(document).ready(function() {
     var food;
     var speed = 300;
 
+    var score = 0;
+    var ptIncrease = 10;
+    var lv = 0;
+    var scoreHolder = $('#scoreHolder');
+
     // move snake in current direction ev speed ms
     var run = setInterval(function() {move();}, speed);
 
     var init = function() {
+      // show score
+      scoreHolder.html(score);
 
       // draw initial snake
       for (var i = 0; i < length; i++) {
@@ -156,9 +163,13 @@ $(document).ready(function() {
         return;
       }
 
-      // update snake
       update(newHead);
 
+    };
+
+    var updateScore = function() {
+      score = score + lv * ptIncrease;
+      scoreHolder.html(score);
     };
 
     // update snake
@@ -173,12 +184,15 @@ $(document).ready(function() {
       if (eatFood(head)) {
         length++;
         generateFood();
+        lv++;
 
         // increase speed
         speed = speed * (1 - 0.05);
         console.log(`speed: ${speed}`);
         clearInterval(run); // stop loop
         run = setInterval(function() {move();}, speed);
+
+        updateScore();
       } else {
         // remove tail
         parts.pop();

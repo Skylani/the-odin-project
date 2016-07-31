@@ -2,6 +2,19 @@ $black: #363533;
 $squareWidth: 20px;
 $sqPerRow: 30;
 
+.container {
+  width: min-content;
+  margin: 0 auto;
+}
+
+header {
+  text-align: center;
+}
+
+#score {
+  text-align: left;
+}
+
 // grid
 .grid {
   border: 2px solid $black;
