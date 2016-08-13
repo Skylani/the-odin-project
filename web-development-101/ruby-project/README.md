@@ -1,4 +1,7 @@
-### Problem 1-12 solved by me.
+# Some Ruby Excercises
+Project Instruction from [The Odin Project](http://www.theodinproject.com/web-development-101/ruby)
+
+Problems 1-12 solved.
 
 Test First Ruby -- RSpec 3 Edition
 ==========
