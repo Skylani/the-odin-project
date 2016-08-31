@@ -2,7 +2,7 @@ A simple restaurant homepage that is entirely generated using just Javascript an
 
 [Demo](https://htmlpreview.github.io/?https://github.com/laniywh/the-odin-project/blob/master/js/restaurant/index.html)
 
-What I've learned
+## What I've learned
 - Manipulate the DOM with jQuery
 
 
