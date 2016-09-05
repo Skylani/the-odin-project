@@ -1,0 +1,20 @@
+--- !ruby/object:Hangman
+letter_bank:
+- e
+- o
+- u
+guesses_left: 2
+chosen_char: save
+secret_word: latchstring
+show_char:
+- false
+- true
+- false
+- false
+- false
+- false
+- false
+- false
+- true
+- false
+- false
