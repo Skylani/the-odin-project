@@ -1,7 +1,7 @@
 #Twitter Spambot
-A client that interacts with the Twitter messaging service.
+A client that interacts with the Twitter messaging service. This project is made for [The Odin Project](http://theodinproject.com)'s [Projects: Ruby on the Web](http://www.theodinproject.com/ruby-programming/ruby-on-the-web).
 
-Tutorial: http://tutorials.jumpstartlab.com/projects/microblogger.html
+The project is done following this [tutorial](http://tutorials.jumpstartlab.com/projects/microblogger.html).
 
 # What I learned
 - require and reload files in irb
