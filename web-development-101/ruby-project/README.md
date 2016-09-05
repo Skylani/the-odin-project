@@ -1,7 +1,10 @@
-### Problem 1-12 solved by me.
+Small Ruby excercises that are solved using Test-driven development technique. This project is made for [The Odin Project](http://theodinproject.com)'s [Project: Ruby](http://www.theodinproject.com/web-development-101/ruby)
 
-Test First Ruby -- RSpec 3 Edition
-==========
+Problems 1-12 solved.
+
+# Project Instructions
+## Test First Ruby -- RSpec 3 Edition
+
 
 See [testfirst.org/learn_ruby](http://testfirst.org/learn_ruby#install) for more information about how this will work.  These test-first Ruby challenges have been forked from [https://github.com/alexch/learn_ruby](https://github.com/alexch/learn_ruby) and updated to use RSpec 3 instead of RSpec 2.
 
