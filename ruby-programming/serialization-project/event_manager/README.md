@@ -1,7 +1,7 @@
-# Even Manager
-Warmup project from [**Project: Serialization and Working with Files**](http://www.theodinproject.com/ruby-programming/file-i-o-and-serialization)
+# Event Manager
+Warmup exercise from [The Odin Project](http://theodinproject.com)'s  [**Project: Serialization and Working with Files**](http://www.theodinproject.com/ruby-programming/file-i-o-and-serialization)
 
-This project is done by following this [tutorial](http://tutorials.jumpstartlab.com/projects/eventmanager.html#eventmanager)
+The project is done by following this [tutorial](http://tutorials.jumpstartlab.com/projects/eventmanager.html#eventmanager)
 
 ## What I Learned
 - manipulate file input and output
