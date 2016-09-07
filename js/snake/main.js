@@ -1,10 +1,13 @@
 
-var gridWidth = 30;
-var gridHeight = 20;
-var square = '<div class="square"></div>';
-var squareClr = '<div class="square clear"></div>';
-var container = $('.grid');
-var squareClass = $('.square');
+var gridWidth = 20,
+    gridHeight = 20,
+    square = '<div class="square"></div>',
+    squareClr = '<div class="square clear"></div>',
+    container = $('.grid'),
+    squareClass = $('.square'),
+    bgColor = '#2B2A28',
+    snakeColor = 'yellow',
+    foodColor = 'white';
 
 $(document).ready(function() {
 
@@ -12,7 +15,6 @@ $(document).ready(function() {
     var direction = 'r';
     var parts = [[3,1], [2,1], [1,1]];
     var length = 3;
-    var food;
     var speed = 300;
 
     var score = 0;
@@ -31,7 +33,7 @@ $(document).ready(function() {
       for (var i = 0; i < length; i++) {
         var nthChild = pos(parts[i]);
         part = container.children().eq(nthChild);
-        part.css("background-color", "red");
+        part.css("background-color", snakeColor);
       }
 
       generateFood();
@@ -78,7 +80,7 @@ $(document).ready(function() {
       } while (foodOnSnake(nthChild + 1));
 
       foodDiv = container.children().eq(nthChild);
-      foodDiv.css("background-color", "green");
+      foodDiv.css("background-color", foodColor);
 
       food = coord(nthChild + 1);
     };
@@ -166,7 +168,7 @@ $(document).ready(function() {
       // add new head
       parts.unshift(head);
       dot = container.children().eq(pos(head));
-      dot.css('background-color', 'red');
+      dot.css('background-color', snakeColor);
 
       if (eatFood(head)) {
         length++;
@@ -184,7 +186,7 @@ $(document).ready(function() {
         // remove tail
         parts.pop();
         dot = container.children().eq(pos(oldTail));
-        dot.css('background-color', 'white');
+        dot.css('background-color', bgColor);
       }
     };
 

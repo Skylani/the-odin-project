@@ -1,6 +1,11 @@
-$black: #363533;
-$squareWidth: 20px;
-$sqPerRow: 30;
+$black: #2B2A28;
+$squareWidth: 30px;
+$sqPerRow: 20;
+
+html, body {
+  background-color: $black;
+  color: white;
+}
 
 .container {
   width: min-content;
@@ -17,7 +22,7 @@ header {
 
 // grid
 .grid {
-  border: 2px solid $black;
+  border: 5px solid white;
   width: calc(#{$squareWidth} * #{$sqPerRow});
 }
 // clearfix
