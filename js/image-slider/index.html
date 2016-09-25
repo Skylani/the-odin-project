@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Image Slider</title>
+</head>
+<style>
+html, body {
+  height: 100%;
+}
+.slides {
+  height: 600px;
+  width: 100%;
+}
+.image-container {
+  width: 80%;
+  height: 600px;
+  position: absolute;
+  top: 0;
+  left: 10%;
+  opacity: 0;
+  transition: .6s opacity ease;
+}
+img {
+  max-height: 100%;
+  max-width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+.nav {
+  text-align: center;
+}
+button {
+  font-size: 20px;
+}
+.chevron-container {
+  font-size: 80px;
+  color: #3D3D3D;
+  height: 600px;
+  line-height: 600px;
+  width: 10%;
+  text-align: center;
+}
+.chevron-container:hover {
+  color: #A8A7A5;
+  cursor: pointer;
+}
+.chevron-left-container {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.chevron-right-container {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.dots {
+  text-align: center;
+  margin-top: 10px;
+  cursor: default;
+}
+.dot {
+  display: inline-block;
+  margin: 5px;
+  background-color: #A8A7A5;
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+</style>
+
+<body>
+
+<div class="slides">
+  <div class="image-container" id="image-0"><img src="images/0.jpg" alt=""></div>
+  <div class="image-container" id="image-1"><img src="images/1.jpg" alt=""></div>
+  <div class="image-container" id="image-2"><img src="images/2.jpg" alt=""></div>
+  <div class="image-container" id="image-3"><img src="images/3.jpg" alt=""></div>
+  <div class="image-container" id="image-4"><img src="images/4.jpg" alt=""></div>
+</div>
+
+<div class="chevron-container chevron-left-container" id="prev">
+  <i class="fa fa-chevron-left" aria-hidden="true"></i>
+</div>
+<div class="chevron-container chevron-right-container" id="next">
+  <i class="fa fa-chevron-right" aria-hidden="true"></i>
+</div>
+
+<div class="dots">
+  <div class="dot" id="dot-0"></div>
+  <div class="dot" id="dot-1"></div>
+  <div class="dot" id="dot-2"></div>
+  <div class="dot" id="dot-3"></div>
+  <div class="dot" id="dot-4"></div>
+</div>
+
+
+<script src="https://use.fontawesome.com/ad66a7769e.js"></script>
+<script>
+
+function updateDotColor(oldDotId, newDotId) {
+  document.getElementById("dot-"+oldDotId).style.backgroundColor = dotColor;
+  document.getElementById("dot-"+newDotId).style.backgroundColor = currDotColor;
+}
+
+function next() {
+  var oldId = currImgNum;
+
+  document.getElementById("image-"+currImgNum).style.opacity = 0;
+  currImgNum = ++currImgNum % numOfImg;
+  document.getElementById("image-"+currImgNum).style.opacity = 1;
+  updateDotColor(oldId, currImgNum);
+}
+
+function prev() {
+  var oldId = currImgNum;
+
+  document.getElementById("image-"+currImgNum).style.opacity = 0;
+
+  // decrease current image number
+  if (currImgNum === 0) {
+    currImgNum = numOfImg - 1;
+  } else {
+    currImgNum--;
+  }
+
+  document.getElementById("image-"+currImgNum).style.opacity = 1;
+  updateDotColor(oldId, currImgNum);
+}
+
+function dotNav(targetId) {
+  var oldId = currImgNum;
+
+  document.getElementById("image-"+currImgNum).style.opacity = 0;
+  currImgNum = targetId;
+  document.getElementById("image-"+currImgNum).style.opacity = 1;
+  updateDotColor(oldId, currImgNum);
+}
+
+function getNumFromDotId(dotId) {
+  return parseInt(dotId[4]);
+}
+
+
+var currImgNum = 0,
+    numOfImg = 5,
+    dotColor = "#A8A7A5",
+    currDotColor = "#3D3D3D"
+    speed = 5000;
+
+document.getElementById("image-0").style.opacity = 1;
+
+document.getElementById("dot-0").style.backgroundColor = currDotColor;
+
+document.getElementById("prev").addEventListener("click", prev);
+document.getElementById("next").addEventListener("click", next);
+
+var dots = document.getElementsByClassName("dot");
+
+// Add listener to the array of dots
+for (var i = 0; i < dots.length; i++) {
+  dots[i].addEventListener("click", function(e){
+    dotNav(getNumFromDotId(e.target.id));
+  });
+}
+
+// play slider
+var play = setInterval(next, speed);
+
+</script>
+</body>
+</html>
