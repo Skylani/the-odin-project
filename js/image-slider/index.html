@@ -151,15 +151,25 @@ var currImgNum = 0,
 
 document.getElementById("image-0").style.opacity = 1;
 document.getElementById("dot-0").style.backgroundColor = currDotColor;
-document.getElementById("prev").addEventListener("click", prev);
-document.getElementById("next").addEventListener("click", next);
+document.getElementById("prev").addEventListener("click", function() {
+  clearInterval(play);
+  prev();
+  play = setInterval(next, speed);
+});
+document.getElementById("next").addEventListener("click", function() {
+  clearInterval(play);
+  next();
+  play = setInterval(next, speed);
+});
 
 var dots = document.getElementsByClassName("dot");
 
 // Add listener to the array of dots
 for (var i = 0; i < dots.length; i++) {
   dots[i].addEventListener("click", function(e){
+    clearInterval(play);
     dotNav(getNumFromDotId(e.target.id));
+    play = setInterval(next, speed);
   });
 }
 
