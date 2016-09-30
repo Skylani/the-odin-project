@@ -21,7 +21,7 @@ html, body {
   opacity: 0;
   transition: .6s opacity ease;
 }
-img {
+.slides img {
   max-height: 100%;
   max-width: 100%;
   position: absolute;
@@ -68,6 +68,26 @@ img {
   border-radius: 10px;
   cursor: pointer;
 }
+
+.thumbnail-container {
+  position: absolute;
+  bottom: 0;
+}
+.thumbnails-left-container {
+  width: 220px;
+  float: left;
+}
+.thumbnails-right-container {
+  width: 220px;
+  float: right;
+}
+.thumbnail {
+  visibility: hidden;
+  position: absolute;
+  bottom: 0;
+  width: 220px;
+  height: auto;
+}
 </style>
 
 <body>
@@ -95,6 +115,23 @@ img {
   <div class="dot" id="dot-4"></div>
 </div>
 
+<div class="thumbnail-containers">
+  <div class="thumbnails-left-container">
+    <img class="thumbnail thumbnail-left" id="thumb-left-0" src="./images/thumbnails/0.jpg" alt="">
+    <img class="thumbnail thumbnail-left" id="thumb-left-1" src="./images/thumbnails/1.jpg" alt="">
+    <img class="thumbnail thumbnail-left" id="thumb-left-2" src="./images/thumbnails/2.jpg" alt="">
+    <img class="thumbnail thumbnail-left" id="thumb-left-3" src="./images/thumbnails/3.jpg" alt="">
+    <img class="thumbnail thumbnail-left" id="thumb-left-4" src="./images/thumbnails/4.jpg" alt="">
+  </div>
+  <div class="thumbnails-right-container">
+    <img class="thumbnail thumbnail-right" id="thumb-right-0" src="./images/thumbnails/0.jpg" alt="">
+    <img class="thumbnail thumbnail-right" id="thumb-right-1" src="./images/thumbnails/1.jpg" alt="">
+    <img class="thumbnail thumbnail-right" id="thumb-right-2" src="./images/thumbnails/2.jpg" alt="">
+    <img class="thumbnail thumbnail-right" id="thumb-right-3" src="./images/thumbnails/3.jpg" alt="">
+    <img class="thumbnail thumbnail-right" id="thumb-right-4" src="./images/thumbnails/4.jpg" alt="">
+  </div>
+</div>
+
 
 <script src="https://use.fontawesome.com/ad66a7769e.js"></script>
 <script>
@@ -107,8 +144,16 @@ function updateDotColor(oldDotId, newDotId) {
 function next() {
   var oldId = currImgNum;
 
+  // hide thumbnail
+  if(thumbLeft) {
+    thumbLeft.style.visibility = 'hidden';
+  }
+  if(thumbRight) {
+    thumbRight.style.visibility = 'hidden';
+  }
+
   document.getElementById("image-"+currImgNum).style.opacity = 0;
-  currImgNum = ++currImgNum % numOfImg;
+  currImgNum = nextImgNum();
   document.getElementById("image-"+currImgNum).style.opacity = 1;
   updateDotColor(oldId, currImgNum);
 }
@@ -116,17 +161,29 @@ function next() {
 function prev() {
   var oldId = currImgNum;
 
-  document.getElementById("image-"+currImgNum).style.opacity = 0;
-
-  // decrease current image number
-  if (currImgNum === 0) {
-    currImgNum = numOfImg - 1;
-  } else {
-    currImgNum--;
+  if(thumbLeft) {
+    thumbLeft.style.visibility = 'hidden';
+  }
+  if(thumbRight) {
+    thumbRight.style.visibility = 'hidden';
   }
 
+  document.getElementById("image-"+currImgNum).style.opacity = 0;
+  // decrease current image number
+  currImgNum = prevImgNum();
   document.getElementById("image-"+currImgNum).style.opacity = 1;
   updateDotColor(oldId, currImgNum);
+}
+
+function prevImgNum() {
+  if (currImgNum === 0) {
+    return numOfImg - 1;
+  } else {
+    return currImgNum - 1;
+  }
+}
+function nextImgNum() {
+  return (currImgNum + 1) % numOfImg;
 }
 
 function dotNav(targetId) {
@@ -149,14 +206,17 @@ var currImgNum = 0,
     currDotColor = "#3D3D3D"
     speed = 5000;
 
+var nextArrow = document.getElementById("next");
+var prevArrow = document.getElementById("prev");
+
 document.getElementById("image-0").style.opacity = 1;
 document.getElementById("dot-0").style.backgroundColor = currDotColor;
-document.getElementById("prev").addEventListener("click", function() {
+prevArrow.addEventListener("click", function() {
   clearInterval(play);
   prev();
   play = setInterval(next, speed);
 });
-document.getElementById("next").addEventListener("click", function() {
+nextArrow.addEventListener("click", function() {
   clearInterval(play);
   next();
   play = setInterval(next, speed);
@@ -172,6 +232,28 @@ for (var i = 0; i < dots.length; i++) {
     play = setInterval(next, speed);
   });
 }
+
+
+// Show thumbnail when arrow hovered
+var thumbRight, thumbLeft;
+document.getElementById("next").addEventListener("mouseover", function() {
+  var thumbId = "thumb-right-"+nextImgNum();
+  thumbRight = document.getElementById(thumbId);
+  thumbRight.style.visibility = 'visible';
+});
+nextArrow.addEventListener("mouseleave", function() {
+  thumbRight.style.visibility = 'hidden';
+});
+
+document.getElementById("prev").addEventListener("mouseover", function() {
+  var thumbId = "thumb-left-"+prevImgNum();
+  thumbLeft = document.getElementById(thumbId);
+  thumbLeft.style.visibility = 'visible';
+});
+prevArrow.addEventListener("mouseleave", function() {
+  thumbLeft.style.visibility = 'hidden';
+});
+
 
 // play slider
 var play = setInterval(next, speed);
