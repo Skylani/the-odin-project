@@ -29,6 +29,8 @@ var Ttt = (function() {
       strike.style.visibility = 'hidden';
       strike.style.opacity = 0;
     }
+    currSymbol = 'O';
+    updateCurrSymbol();
     grid = [];
     createGrid();
     render();
