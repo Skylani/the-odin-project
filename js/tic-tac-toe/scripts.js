@@ -24,11 +24,6 @@ var Ttt = (function() {
   };
 
   var restart = function() {
-    // Hide strike
-    if(typeof strike != 'undefined') {
-      strike.style.visibility = 'hidden';
-      strike.style.opacity = 0;
-    }
     currSymbol = 'O';
     updateCurrSymbol();
     grid = [];
@@ -97,7 +92,7 @@ var Ttt = (function() {
 
           // Check winner
           if(win()) {
-            showWinner();
+            setTimeout(showWinner, 800);
             return;
           }
 
@@ -117,6 +112,11 @@ var Ttt = (function() {
     winnerHolder.innerHTML = currSymbol;
     winDrawHolder.innerHTML = 'Winner!';
     showResult();
+    // Hide strike
+    if(typeof strike != 'undefined') {
+      strike.style.visibility = 'hidden';
+      strike.style.opacity = 0;
+    }
   };
 
   var showDraw = function() {
