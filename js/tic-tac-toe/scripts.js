@@ -25,7 +25,7 @@ var Ttt = (function() {
 
   var restart = function() {
     // Hide strike
-    if(strike) {
+    if(typeof strike != 'undefined') {
       strike.style.visibility = 'hidden';
       strike.style.opacity = 0;
     }
