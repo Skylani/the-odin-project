@@ -2,7 +2,8 @@ var Minesweeper = (function() {
   var difficulties = {
     easy: { width: 9, numOfMines: 7 }
   };
-  var mineBgColor = 'red';
+  var mineBgColor = '#EF4836';
+  var revealBgColor = '#ABB7B7';
 
 
   var init = function() {
@@ -77,7 +78,7 @@ var Minesweeper = (function() {
 
   var revealCell = function(cellObj) {
     cellObj.reveal = true;
-    Board.getCellElemFromObj(cellObj).style.backgroundColor = '#666';
+    Board.getCellElemFromObj(cellObj).style.backgroundColor = revealBgColor;
 
   }
 
