@@ -19,8 +19,7 @@ var Minesweeper = (function() {
 
     toCheckStack = new Array();
     mines = new Array();
-    numOfMines = difficulty.numOfMines;
-    minesLeft = numOfMines;
+    minesLeft = getNumOfMines;
     started = false;
 
     Board.init(getWidth(), getHeight());
@@ -34,7 +33,7 @@ var Minesweeper = (function() {
   var flag = function(cellElem) {
     cellElem.innerHTML = 'F';
     Board.getCellObjFromElem(cellElem).reveal = true;
-    numOfMines--;
+    minesLeft--;
   };
 
 
@@ -49,7 +48,7 @@ var Minesweeper = (function() {
   };
 
   var startTimer = function(e) {
-    window.setInterval(function(){
+    timerInterval = window.setInterval(function(){
       time++;
       updateTimeDisplay();
     }, 1000);
@@ -84,7 +83,7 @@ var Minesweeper = (function() {
         } else {
           if(!Board.getCellObjFromElem(this).reveal) {
             if(!revealCells(this)) {
-              console.log('game over');
+              gameOver();
             }
 
           }
@@ -94,6 +93,9 @@ var Minesweeper = (function() {
   };
 
   var gameOver = function() {
+    console.log('game over');
+    clearInterval(timerInterval);
+
 
   }
 
