@@ -12,7 +12,7 @@ header {
   /*width: 400px;*/
   /*margin: 0 auto;*/
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 }
 #board {
   min-width: 100px;
@@ -20,7 +20,7 @@ header {
   justify-content: center;
   flex-direction: row;
 }
-.game-header {
+.game-sidebar {
   padding: 4px;
   font-size: 20px;
   font-weight: bold;
@@ -44,7 +44,7 @@ header {
   background: #666;
   width: 30px;
   height: 30px;
-  margin: 2px;
+  margin: 1px;
   line-height: 30px;
   font-size: 20px;
   text-align: center;

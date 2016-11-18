@@ -7,20 +7,27 @@ var Minesweeper = (function() {
   var mineBgColor = '#EF4836';
   var revealBgColor = '#ABB7B7';
   var numOfRevealCells = 0;
+  var time = 0;
+  var infoNumDigits = 3;
 
   var win = function() {
     return numOfRevealCells == difficulty.width * difficulty.height - difficulty.numOfMines;
   };
 
   var init = function() {
-    difficulty = difficulties.expert;   // Set difficulty
+    difficulty = difficulties.beginner;   // Set difficulty
 
     toCheckStack = new Array();
     mines = new Array();
     numOfMines = difficulty.numOfMines;
+    minesLeft = numOfMines;
+    started = false;
 
     Board.init(getWidth(), getHeight());
+    cellElems = Board.getCellElems();
     generateMines();
+
+    timer();
     moveListener();
   };
 
@@ -31,10 +38,47 @@ var Minesweeper = (function() {
   };
 
 
+  var timer = function() {
+    // create events
+    document.getElementById('board').addEventListener('click', function(e) {
+      // remove event
+      document.getElementById('board').removeEventListener(e.type, arguments.callee);
+
+      startTimer();
+    });
+  };
+
+  var startTimer = function(e) {
+    window.setInterval(function(){
+      time++;
+      updateTimeDisplay();
+    }, 1000);
+  };
+
+  var updateTimeDisplay = function() {
+    document.getElementById('time').innerHTML = padZero(infoNumDigits, time);
+  };
+
+  var padZero = function(totalDigits, num) {
+    var paddedNumStr = num;
+    for(var i = 1; i <= totalDigits; i++) {
+      // Num has i digits
+      if(num / (i * 10) < 1) {
+        // Pad (totalDigits - i) number of zero
+        for (var j = 0; j < totalDigits - i; j++) {
+          paddedNumStr = '0' + paddedNumStr;
+        }
+        return paddedNumStr;
+      }
+    }
+  };
+
+
   var moveListener = function() {
-    var cellElems = Board.cellElems;
+    // var cellElems = Board.cellElems;
     for(var i = 0; i < cellElems.length; i++) {
       cellElems[i].addEventListener('mousedown', function(ev) {
+        started = true;
         if(ev.which == 3) {
           flag(this);
         } else {
@@ -69,6 +113,7 @@ var Minesweeper = (function() {
 
   // Return true if no explosion, otherwise false
   var revealCells = function(cellElem) {
+
     var cellObj = Board.getCellObjFromElem(cellElem);
 
     if(cellObj.isMine) {
@@ -197,47 +242,47 @@ var Minesweeper = (function() {
   Board
   -----------------------------------------------------*/
   var Board = (function() {
-    var init = function(width, height) {
-      Board.container = document.getElementById('board');
-      Board.width = width;
-      Board.height = height;
-      Board.cells = new Array(Board.width);
+    var init = function(w, h) {
+      container = document.getElementById('board');
+      width = w;
+      height = h;
+      cells = new Array(width);
       createCells();
       draw();
-      Board.cellElems = document.getElementsByClassName('cell');
+      cellElems = document.getElementsByClassName('cell');
     };
 
     var draw = function() {
-      for (var i = 0; i < Board.width; i++) {
+      for (var i = 0; i < width; i++) {
         // Create column container
         var col = document.createElement('div');
         col.className = 'col';
-        Board.container.appendChild(col);
+        container.appendChild(col);
 
         // Put cells in current column
-        for (var j = 0; j < Board.height; j++) {
+        for (var j = 0; j < height; j++) {
           var cell = document.createElement('div');
           cell.className = 'cell';
           cell.id = 'cell-' + i + '-' + j;
-          Board.container.childNodes[i].appendChild(cell);
+          container.childNodes[i].appendChild(cell);
         }
       }
     };
 
     var getCell = function(x, y) {
-      return Board.cells[x][y];
+      return cells[x][y];
     }
 
     var createCells = function() {
       // Create empty arrays
-      for (var i = 0; i < Board.width; i++) {
-        Board.cells[i] = new Array(Board.height);
+      for (var i = 0; i < width; i++) {
+        cells[i] = new Array(height);
       }
 
       // Fill each slot with a cell
-      for (var i = 0; i < Board.cells.length; i++) {
-        for (var j = 0; j < Board.cells[i].length; j++) {
-          Board.cells[i][j] = new Cell(i, j);
+      for (var i = 0; i < cells.length; i++) {
+        for (var j = 0; j < cells[i].length; j++) {
+          cells[i][j] = new Cell(i, j);
         }
       }
     };
@@ -252,7 +297,7 @@ var Minesweeper = (function() {
       for(var i in xs) {
         for(var j in ys) {
           // Put in neighbors array if not off the board
-          if(xs[i] > -1 && xs[i] < Board.width && ys[j] > -1 && ys[j] < Board.height) {
+          if(xs[i] > -1 && xs[i] < width && ys[j] > -1 && ys[j] < height) {
             // Put in neighbors array if not current cell
             if(!(xs[i] == x && ys[j] == y)) {
               neighbors.push(getCell(xs[i], ys[j]));
@@ -281,6 +326,10 @@ var Minesweeper = (function() {
       return getCell(x, y);
     };
 
+    var getCellElems = function() {
+      return cellElems;
+    };
+
     var cellId = function(x, y) {
       return 'cell-' + x + '-' + y;
     }
@@ -293,6 +342,7 @@ var Minesweeper = (function() {
       getCellElement: getCellElement,
       getCellObjFromElem: getCellObjFromElem,
       getCellElemFromObj: getCellElemFromObj,
+      getCellElems: getCellElems,
       cellId: cellId,
     }
 
@@ -315,7 +365,6 @@ var Minesweeper = (function() {
 
   return {
     init: init,
-    show: show,
   }
 })();
 
