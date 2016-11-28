@@ -1,11 +1,12 @@
 var Minesweeper = (function() {
   var difficulties = {
-    beginner: { width: 9, height: 9, numOfMines: 7 },
+    beginner: { width: 9, height: 9, numOfMines: 80 },
     intermediate: { width: 16, height: 16, numOfMines: 40 },
     expert: { width: 30, height: 16, numOfMines: 99 },
   };
   var mineBgColor = '#EF4836';
   var revealBgColor = '#ABB7B7';
+  var hideBgColor = '#666';
   var numOfRevealCells = 0;
   var time = 0;
   var infoNumDigits = 3;
@@ -22,7 +23,6 @@ var Minesweeper = (function() {
     mines = new Array();
     minesLeft = getNumOfMines();
     setMines(minesLeft);
-    started = false;
 
     Board.init(getWidth(), getHeight());
     cellElems = Board.getCellElems();
@@ -30,6 +30,14 @@ var Minesweeper = (function() {
 
     timer();
     moveListener();
+    restartListener();
+  };
+
+  var restartListener = function() {
+    document.getElementById('restart-btn').addEventListener('click', function() {
+      Minesweeper.init();
+
+    });
   };
 
   var setMines = function(numOfMines) {
@@ -50,11 +58,11 @@ var Minesweeper = (function() {
 
   var timer = function() {
     // create events
-    document.getElementById('board').addEventListener('click', function(e) {
+    document.getElementById('board').addEventListener('mousedown', function(e) {
       // remove event
       document.getElementById('board').removeEventListener(e.type, arguments.callee);
 
-      startTimer();
+      if(started) startTimer();
     });
   };
 
@@ -85,6 +93,7 @@ var Minesweeper = (function() {
 
 
   var moveListener = function() {
+    started = true;
     // var cellElems = Board.cellElems;
     for(cellElem of cellElems) {
       cellElem.addEventListener('mousedown', clickAction);
@@ -92,7 +101,6 @@ var Minesweeper = (function() {
   };
 
   var clickAction = function(ev) {
-    started = true;
     if(ev.which == 3) {
       flag(this);
     } else {
@@ -155,19 +163,24 @@ var Minesweeper = (function() {
   };
 
   var stopGame = function() {
-    clearInterval(timerInterval);
+    started = false;
     for(cellElem of cellElems) {
       cellElem.removeEventListener('mousedown', clickAction);
     }
     document.getElementById('slide').style.left = '-100%';
+    clearInterval(timerInterval);
   };
 
   var revealCell = function(cellObj) {
     cellObj.reveal = true;
     Board.getCellElemFromObj(cellObj).style.backgroundColor = revealBgColor;
     numOfRevealCells++;
-    // console.log(numOfRevealCells);
+  };
 
+
+  var hideCell = function(cellObj) {
+    cellObj.reveal = false;
+    Board.getCellElemFromObj(cellObj).style.backgroundColor = hideBgColor;
   };
 
   var revealNeighbors = function(cellElem) {
