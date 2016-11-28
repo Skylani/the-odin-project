@@ -1,5 +1,6 @@
 body {
   font-family: 'VT323', sans-serif;
+  font-size: 20px;
   color: #fff;
   user-select: none;
   cursor: default;
@@ -7,33 +8,30 @@ body {
 }
 header {
   text-align: center;
+  padding-bottom: 20px;
 }
-.container {
-  /*width: 400px;*/
-  /*margin: 0 auto;*/
-  display: flex;
-  flex-direction: row;
+.game-control {
+  text-align: center;
 }
-#board {
-  min-width: 100px;
-  display: flex;
-  justify-content: center;
-  flex-direction: row;
+.info {
+  display: inline-block;
+  padding-bottom: 30px;
 }
-.game-sidebar {
-  padding: 4px;
-  font-size: 20px;
-  font-weight: bold;
-
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+.info span {
+  padding-right: 20px;
 }
 .restart-btn {
   fill: #fff;
   width: 30px;
   height: 30px;
-  padding-right: 6px;
+
+  position: relative;
+  top: 13px;
+}
+#board {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
 }
 .col {
   display: flex;

@@ -15,7 +15,7 @@ var Minesweeper = (function() {
   };
 
   var init = function() {
-    difficulty = difficulties.beginner;   // Set difficulty
+    difficulty = difficulties.expert;   // Set difficulty
 
     toCheckStack = new Array();
     mines = new Array();
@@ -62,7 +62,7 @@ var Minesweeper = (function() {
     var paddedNumStr = num;
     for(var i = 1; i <= totalDigits; i++) {
       // Num has i digits
-      if(num / (i * 10) < 1) {
+      if(num / Math.pow(10, i) < 1) {
         // Pad (totalDigits - i) number of zero
         for (var j = 0; j < totalDigits - i; j++) {
           paddedNumStr = '0' + paddedNumStr;
@@ -75,8 +75,8 @@ var Minesweeper = (function() {
 
   var moveListener = function() {
     // var cellElems = Board.cellElems;
-    for(var i = 0; i < cellElems.length; i++) {
-      cellElems[i].addEventListener('mousedown', function(ev) {
+    for(cellElem of cellElems) {
+      cellElem.addEventListener('mousedown', function(ev) {
         started = true;
         if(ev.which == 3) {
           flag(this);
@@ -100,8 +100,8 @@ var Minesweeper = (function() {
   }
 
   var explodeAll = function() {
-    for(i in mines) {
-      var mine = mines[i];
+    for(mine of mines) {
+      // var mine = mines[i];
       var mineElem = document.getElementById(Board.cellId(mine[0], mine[1]));
       explode(mineElem);
     }
@@ -134,6 +134,7 @@ var Minesweeper = (function() {
 
     if(win()) {
       console.log('win');
+      clearInterval(timerInterval);
     }
 
     return true;
