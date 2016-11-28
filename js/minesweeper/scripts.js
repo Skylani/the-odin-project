@@ -15,11 +15,13 @@ var Minesweeper = (function() {
   };
 
   var init = function() {
-    difficulty = difficulties.expert;   // Set difficulty
+    difficulty = difficulties.beginner;   // Set difficulty
 
+    timerInterval = undefined;
     toCheckStack = new Array();
     mines = new Array();
-    minesLeft = getNumOfMines;
+    minesLeft = getNumOfMines();
+    setMines(minesLeft);
     started = false;
 
     Board.init(getWidth(), getHeight());
@@ -30,10 +32,19 @@ var Minesweeper = (function() {
     moveListener();
   };
 
+  var setMines = function(numOfMines) {
+    if(numOfMines >= 0) {
+      document.getElementById('mines').innerHTML = padZero(infoNumDigits, numOfMines);
+    } else {
+      document.getElementById('mines').innerHTML = '-' + padZero(infoNumDigits - 1, numOfMines * (-1));
+    }
+  };
+
   var flag = function(cellElem) {
     cellElem.innerHTML = 'F';
     Board.getCellObjFromElem(cellElem).reveal = true;
     minesLeft--;
+    setMines(minesLeft);
   };
 
 
@@ -76,28 +87,24 @@ var Minesweeper = (function() {
   var moveListener = function() {
     // var cellElems = Board.cellElems;
     for(cellElem of cellElems) {
-      cellElem.addEventListener('mousedown', function(ev) {
-        started = true;
-        if(ev.which == 3) {
-          flag(this);
-        } else {
-          if(!Board.getCellObjFromElem(this).reveal) {
-            if(!revealCells(this)) {
-              gameOver();
-            }
-
-          }
-        }
-      });
+      cellElem.addEventListener('mousedown', clickAction);
     }
   };
 
-  var gameOver = function() {
-    console.log('game over');
-    clearInterval(timerInterval);
+  var clickAction = function(ev) {
+    started = true;
+    if(ev.which == 3) {
+      flag(this);
+    } else {
+      if(!Board.getCellObjFromElem(this).reveal) {
+        if(!revealCells(this)) {
+          gameOver();
+        }
 
+      }
+    }
+  };
 
-  }
 
   var explodeAll = function() {
     for(mine of mines) {
@@ -132,12 +139,27 @@ var Minesweeper = (function() {
       revealNeighbors(cellElem);
     }
 
-    if(win()) {
-      console.log('win');
-      clearInterval(timerInterval);
-    }
+    if(win()) winGame();
 
     return true;
+  };
+
+  var gameOver = function() {
+    document.getElementById('msg').innerHTML = 'Game Over!';
+    stopGame();
+  };
+
+  var winGame = function() {
+    document.getElementById('msg').innerHTML = 'You Win!';
+    stopGame();
+  };
+
+  var stopGame = function() {
+    clearInterval(timerInterval);
+    for(cellElem of cellElems) {
+      cellElem.removeEventListener('mousedown', clickAction);
+    }
+    document.getElementById('slide').style.left = '-100%';
   };
 
   var revealCell = function(cellObj) {
@@ -146,7 +168,7 @@ var Minesweeper = (function() {
     numOfRevealCells++;
     // console.log(numOfRevealCells);
 
-  }
+  };
 
   var revealNeighbors = function(cellElem) {
     var cellObj = Board.getCellObjFromElem(cellElem);;

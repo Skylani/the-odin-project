@@ -5,10 +5,15 @@ body {
   user-select: none;
   cursor: default;
   background: #333;
+  margin: 0;
 }
+/*h1 {
+  margin: 0;
+}
+*/
 header {
   text-align: center;
-  padding-bottom: 20px;
+  padding: 10px;
 }
 .game-control {
   text-align: center;
@@ -46,4 +51,28 @@ header {
   line-height: 30px;
   font-size: 20px;
   text-align: center;
+}
+
+#slide {
+  pointer-events: none;
+  text-transform: uppercase;
+  font-size: 220px;
+
+  position: absolute;
+  left: 0;
+  width: 200vw;
+  height: 100vh;
+
+  display: flex;
+  justify-content: flex-end;
+
+}
+#slide {
+  transition: left .4s ease-in-out;
+}
+.msg-container {
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
