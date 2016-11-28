@@ -32,6 +32,8 @@ header {
 
   position: relative;
   top: 13px;
+
+  cursor: pointer;
 }
 #board {
   display: flex;
