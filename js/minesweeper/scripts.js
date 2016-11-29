@@ -4,6 +4,7 @@ var Minesweeper = (function() {
     intermediate: { width: 16, height: 16, numOfMines: 40 },
     expert: { width: 30, height: 16, numOfMines: 99 },
   };
+  var prevDifficulty = undefined;
   var mineBgColor = '#EF4836';
   var revealBgColor = '#ABB7B7';
   var hideBgColor = '#666';
@@ -17,9 +18,19 @@ var Minesweeper = (function() {
     return numOfRevealCells == difficulty.width * difficulty.height - difficulty.numOfMines;
   };
 
+  var setDifficulty = function(diffName) {
+    difficulty = difficulties[diffName];
+
+    // Update interface
+    if(prevDifficulty) {
+      prevDifficulty.style.borderBottom = 'none';
+    }
+    prevDifficulty = document.getElementById(diffName);
+    prevDifficulty.style.borderBottom = '3px solid #fff';
+  };
 
   var initApp = function() {
-    difficulty = difficulties.beginner;   // Set difficulty
+    setDifficulty('beginner');   // Set difficulty
     lvlListener();
     init();
   };
@@ -49,7 +60,7 @@ var Minesweeper = (function() {
     var lvlNames = Object.keys(difficulties);
     lvlNames.forEach(function(lvl) {
       document.getElementById(lvl).addEventListener('click', function() {
-        difficulty = difficulties[lvl];
+        setDifficulty(lvl);
         restart();
       });
     });
@@ -230,7 +241,7 @@ var Minesweeper = (function() {
     console.log('show msg');
 
     msgSlide.style.display = 'flex';
-    setTimeout(slideIn, 450);
+    setTimeout(slideIn, 100);
   };
 
   var slideIn = function() {
@@ -240,7 +251,7 @@ var Minesweeper = (function() {
 
   var hideMsg = function() {
     msgSlide.style.left = '0';
-    setTimeout(hideSlide, 450);
+    setTimeout(hideSlide, 100);
   };
 
 
