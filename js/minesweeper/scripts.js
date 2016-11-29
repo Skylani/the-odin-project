@@ -14,8 +14,13 @@ var Minesweeper = (function() {
     return numOfRevealCells == difficulty.width * difficulty.height - difficulty.numOfMines;
   };
 
-  var init = function() {
+  var initApp = function() {
     difficulty = difficulties.beginner;   // Set difficulty
+    lvlListener();
+    init();
+  }
+
+  var init = function() {
 
     toCheckStack = new Array();
     mines = new Array();
@@ -35,14 +40,28 @@ var Minesweeper = (function() {
     restartListener();
   };
 
-  var restartListener = function() {
-    document.getElementById('restart-btn').addEventListener('click', function() {
-      hideMsg();
-      clearTimer();
-
-      Board.removeCells();
-      Minesweeper.init();
+  var lvlListener = function() {
+    var lvlNames = Object.keys(difficulties);
+    lvlNames.forEach(function(lvl) {
+      console.log(lvl);
+      document.getElementById(lvl).addEventListener('click', function() {
+        console.log(lvl);
+        difficulty = difficulties[lvl];
+        restart();
+      });
     });
+  };
+
+  var restartListener = function() {
+    document.getElementById('restart-btn').addEventListener('click', restart);
+  };
+
+  var restart = function() {
+    hideMsg();
+    clearTimer();
+
+    Board.removeCells();
+    init();
   };
 
   var updateMinesDisplay = function() {
@@ -429,9 +448,9 @@ var Minesweeper = (function() {
 
 
   return {
-    init: init,
+    initApp: initApp,
   }
 })();
 
 
-Minesweeper.init();
+Minesweeper.initApp();
