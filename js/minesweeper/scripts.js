@@ -10,18 +10,22 @@ var Minesweeper = (function() {
   var infoNumDigits = 3;
   var timerInterval = undefined;
 
+  var msgSlide = document.getElementById('slide');
+
+
   var win = function() {
     return numOfRevealCells == difficulty.width * difficulty.height - difficulty.numOfMines;
   };
+
 
   var initApp = function() {
     difficulty = difficulties.beginner;   // Set difficulty
     lvlListener();
     init();
-  }
+  };
+
 
   var init = function() {
-
     toCheckStack = new Array();
     mines = new Array();
     numOfRevealCells = 0;
@@ -40,21 +44,22 @@ var Minesweeper = (function() {
     restartListener();
   };
 
+
   var lvlListener = function() {
     var lvlNames = Object.keys(difficulties);
     lvlNames.forEach(function(lvl) {
-      console.log(lvl);
       document.getElementById(lvl).addEventListener('click', function() {
-        console.log(lvl);
         difficulty = difficulties[lvl];
         restart();
       });
     });
   };
 
+
   var restartListener = function() {
     document.getElementById('restart-btn').addEventListener('click', restart);
   };
+
 
   var restart = function() {
     hideMsg();
@@ -64,6 +69,7 @@ var Minesweeper = (function() {
     init();
   };
 
+
   var updateMinesDisplay = function() {
     if(minesLeft >= 0) {
       document.getElementById('mines').innerHTML = padZero(infoNumDigits, minesLeft);
@@ -72,8 +78,11 @@ var Minesweeper = (function() {
     }
   };
 
+
   var flag = function(cellElem) {
     var cellObj = Board.getCellObjFromElem(cellElem);
+
+    if(cellObj.reveal && !cellObj.flag) return;
 
     if(cellObj.flag) {
       cellObj.flag = false;
@@ -100,18 +109,21 @@ var Minesweeper = (function() {
     });
   };
 
+
   var startTimer = function(e) {
     if(timerInterval) return; // fix multiple timers running
 
-    timerInterval = window.setInterval(function(){
+    timerInterval = setInterval(function(){
       time++;
       updateTimeDisplay();
     }, 1000);
   };
 
+
   var updateTimeDisplay = function() {
     document.getElementById('time').innerHTML = padZero(infoNumDigits, time);
   };
+
 
   var padZero = function(totalDigits, num) {
     var paddedNumStr = num;
@@ -130,11 +142,11 @@ var Minesweeper = (function() {
 
   var moveListener = function() {
     started = true;
-    // var cellElems = Board.cellElems;
-    for(cellElem of cellElems) {
-      cellElem.addEventListener('mousedown', clickAction);
+    for(var i = 0; i < cellElems.length; i++) {
+      cellElems[i].addEventListener('mousedown', clickAction);
     }
   };
+
 
   var clickAction = function(ev) {
     if(ev.which == 3) {
@@ -152,9 +164,7 @@ var Minesweeper = (function() {
 
   var explodeAll = function() {
     for(mine of mines) {
-      // var mine = mines[i];
-      var mineElem = document.getElementById(Board.cellId(mine[0], mine[1]));
-      explode(mineElem);
+      explode(Board.getCellElem(mine[0], mine[1]));
     }
   };
 
@@ -166,7 +176,6 @@ var Minesweeper = (function() {
 
   // Return true if no explosion, otherwise false
   var revealCells = function(cellElem) {
-
     var cellObj = Board.getCellObjFromElem(cellElem);
 
     if(cellObj.isMine) {
@@ -188,37 +197,57 @@ var Minesweeper = (function() {
     return true;
   };
 
+
   var gameOver = function() {
     document.getElementById('msg').innerHTML = 'Game Over!';
     stopGame();
   };
+
 
   var winGame = function() {
     document.getElementById('msg').innerHTML = 'You Win!';
     stopGame();
   };
 
+
   var stopGame = function() {
     started = false;
-    for(cellElem of cellElems) {
-      cellElem.removeEventListener('mousedown', clickAction);
+    for(var i = 0; i < cellElems.length; i++) {
+      cellElems[i].removeEventListener('mousedown', clickAction);
     }
     showMsg();
     clearTimer();
   };
+
 
   var clearTimer = function() {
     clearInterval(timerInterval);
     timerInterval = null;
   };
 
+
   var showMsg = function() {
-    document.getElementById('slide').style.left = '-100%';
+    console.log('show msg');
+
+    msgSlide.style.display = 'flex';
+    setTimeout(slideIn, 450);
   };
 
-  var hideMsg = function() {
-    document.getElementById('slide').style.left = '0';
+  var slideIn = function() {
+    msgSlide.style.left = '-100%';
   };
+
+
+  var hideMsg = function() {
+    msgSlide.style.left = '0';
+    setTimeout(hideSlide, 450);
+  };
+
+
+  var hideSlide = function() {
+    msgSlide.style.display = 'none';
+  };
+
 
   var revealCell = function(cellObj) {
     cellObj.reveal = true;
@@ -232,6 +261,7 @@ var Minesweeper = (function() {
     Board.getCellElemFromObj(cellObj).style.backgroundColor = hideBgColor;
   };
 
+
   var revealNeighbors = function(cellElem) {
     var cellObj = Board.getCellObjFromElem(cellElem);;
 
@@ -242,8 +272,8 @@ var Minesweeper = (function() {
 
       revealCells(Board.getCellElemFromObj(cell));
     }
-
   };
+
 
   // Find neightbors that are not revealed yet
   var neighborsToCheck = function(cell) {
@@ -263,18 +293,17 @@ var Minesweeper = (function() {
 
 
   var show = function() {
-    var cells = Board.cellElems;
-    for(var i = 0; i < cells.length; i++) {
-      var cellObj = Board.getCellObjFromElem(cells[i]);
+    for(var i = 0; i < cellElems.length; i++) {
+      var cellObj = Board.getCellObjFromElem(cellElems[i]);
 
       if(cellObj.isMine) {
-        explode(cells[i]);
+        explode(cellElems[i]);
       } else {
-        cells[i].innerHTML = cellObj.mines;
+        cellElems[i].innerHTML = cellObj.mines;
       }
     }
-
   };
+
 
   var generateMines = function() {
     for (var i = 0; i < getNumOfMines(); i++) {
@@ -291,6 +320,7 @@ var Minesweeper = (function() {
     }
   };
 
+
   var putMine = function (x, y) {
     var cell = Board.getCell(x, y);
     cell.isMine = true;
@@ -298,6 +328,7 @@ var Minesweeper = (function() {
 
     incrementNeighborMinesNum(cell);
   };
+
 
   var incrementNeighborMinesNum = function (cell) {
     var neighbors = Board.getNeighbors(cell);
@@ -307,17 +338,21 @@ var Minesweeper = (function() {
     }
   };
 
+
   var cellIsMine = function(x, y) {
     return Board.getCell(x, y).isMine;
   };
+
 
   var getWidth = function() {
     return difficulty.width;
   };
 
+
   var getHeight = function() {
     return difficulty.height;
   };
+
 
   var getNumOfMines = function() {
     return difficulty.numOfMines;
@@ -329,6 +364,8 @@ var Minesweeper = (function() {
   Board
   -----------------------------------------------------*/
   var Board = (function() {
+    var cellClassName = 'cell';
+
     var init = function(w, h) {
       container = document.getElementById('board');
       width = w;
@@ -336,8 +373,9 @@ var Minesweeper = (function() {
       cells = new Array(width);
       createCells();
       draw();
-      cellElems = document.getElementsByClassName('cell');
+      cellElems = document.getElementsByClassName(cellClassName);
     };
+
 
     var draw = function() {
       for (var i = 0; i < width; i++) {
@@ -349,12 +387,13 @@ var Minesweeper = (function() {
         // Put cells in current column
         for (var j = 0; j < height; j++) {
           var cell = document.createElement('div');
-          cell.className = 'cell';
-          cell.id = 'cell-' + i + '-' + j;
+          cell.className = cellClassName;
+          cell.id = cellClassName + '-' + i + '-' + j;
           container.childNodes[i].appendChild(cell);
         }
       }
     };
+
 
     var removeCells = function() {
       while(container.hasChildNodes()) {
@@ -362,9 +401,11 @@ var Minesweeper = (function() {
       }
     };
 
+
     var getCell = function(x, y) {
       return cells[x][y];
-    }
+    };
+
 
     var createCells = function() {
       // Create empty arrays
@@ -379,6 +420,7 @@ var Minesweeper = (function() {
         }
       }
     };
+
 
     var getNeighbors = function(cell) {
       var neighbors = new Array(),
@@ -403,13 +445,15 @@ var Minesweeper = (function() {
     };
 
 
-    var getCellElement = function (x, y) {
+    var getCellElem = function (x, y) {
       return document.getElementById(Board.cellId(x, y));
     };
+
 
     var getCellElemFromObj = function (cellObj) {
       return document.getElementById(Board.cellId(cellObj.x, cellObj.y));
     };
+
 
     var getCellObjFromElem = function(cellElem) {
       var idElems = cellElem.id.split('-');
@@ -419,20 +463,22 @@ var Minesweeper = (function() {
       return getCell(x, y);
     };
 
+
     var getCellElems = function() {
       return cellElems;
     };
 
+
     var cellId = function(x, y) {
       return 'cell-' + x + '-' + y;
-    }
+    };
 
 
     return {
       init: init,
       getNeighbors: getNeighbors,
       getCell: getCell,
-      getCellElement: getCellElement,
+      getCellElem: getCellElem,
       getCellObjFromElem: getCellObjFromElem,
       getCellElemFromObj: getCellElemFromObj,
       getCellElems: getCellElems,
@@ -455,7 +501,7 @@ var Minesweeper = (function() {
     this.isMine = false;
 
     return this;
-  }
+  };
 
 
   return {

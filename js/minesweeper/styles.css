@@ -1,4 +1,4 @@
-body {
+body, html {
   font-family: 'VT323', sans-serif;
   font-size: 20px;
   color: #fff;
@@ -6,6 +6,8 @@ body {
   cursor: default;
   background: #333;
   margin: 0;
+  height: 100%;
+  width: 100%;
 }
 header {
   text-align: center;
@@ -52,19 +54,18 @@ header {
 
 #slide {
   pointer-events: none;
+  display: none;
+
   text-transform: uppercase;
   font-size: 220px;
 
   position: absolute;
-  left: 0;
-  width: 200vw;
-  height: 100vh;
-
-  display: flex;
+  width: 200%;
+  height: 100%;
+  /*display: flex;*/
   justify-content: flex-end;
 
-}
-#slide {
+  left: 0%;
   transition: left .4s ease-in-out;
 }
 .msg-container {
