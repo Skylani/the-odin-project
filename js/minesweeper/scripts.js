@@ -1,6 +1,6 @@
 var Minesweeper = (function() {
   var difficulties = {
-    beginner: { width: 9, height: 9, numOfMines: 7 },
+    beginner: { width: 9, height: 9, numOfMines: 10 },
     intermediate: { width: 16, height: 16, numOfMines: 40 },
     expert: { width: 30, height: 16, numOfMines: 99 },
   };
