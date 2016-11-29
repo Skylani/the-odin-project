@@ -73,9 +73,19 @@ var Minesweeper = (function() {
   };
 
   var flag = function(cellElem) {
-    cellElem.innerHTML = 'F';
-    Board.getCellObjFromElem(cellElem).reveal = true;
-    minesLeft--;
+    var cellObj = Board.getCellObjFromElem(cellElem);
+
+    if(cellObj.flag) {
+      cellObj.flag = false;
+      cellElem.innerHTML = '';
+      Board.getCellObjFromElem(cellElem).reveal = false;
+      minesLeft++;
+    } else {
+      cellObj.flag = true;
+      cellElem.innerHTML = 'F';
+      Board.getCellObjFromElem(cellElem).reveal = true;
+      minesLeft--;
+    }
     updateMinesDisplay();
   };
 
@@ -439,6 +449,7 @@ var Minesweeper = (function() {
     this.x = x;
     this.y = y;
     this.reveal = false;
+    this.flag = false;
     this.mines = 0;
     this.inStack = false;
     this.isMine = false;
