@@ -111,13 +111,16 @@ var Minesweeper = (function() {
 
 
   var timer = function() {
-    // create events
-    document.getElementById('board').addEventListener('mousedown', function(e) {
-      // remove event
-      document.getElementById('board').removeEventListener(e.type, arguments.callee);
+    for(var i = 0; i < cellElems.length; i++) {
+      cellElems[i].addEventListener('mousedown', function(e) {
+        // remove event listeners
+        for(var i = 0; i < cellElems.length; i++) {
+          cellElems[i].removeEventListener(e.type, arguments.callee);
+        }
 
-      if(started) startTimer();
-    });
+        if(started) startTimer();
+      });
+    }
   };
 
 
