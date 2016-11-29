@@ -125,7 +125,10 @@ var Minesweeper = (function() {
     if(timerInterval) return; // fix multiple timers running
 
     timerInterval = setInterval(function(){
-      time++;
+      if(++time > 999) {
+        clearTimer();
+        return;
+      }
       updateTimeDisplay();
     }, 1000);
   };
