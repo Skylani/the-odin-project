@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mint > Start Here</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+
+<div id="page-container">
+
+  <header>
+
+    <nav>
+      <ul class="nav">
+        <li class="selected"><a href="#">Sign up</a></li>
+        <li><a href="#">Log in</a></li>
+      </ul>
+    </nav>
+
+    <div id="logo-container">
+      <img src="img/logo.png">
+    </div>
+
+  </header>
+
+  <section class="main-container">
+    <aside>
+      <div id="sidebar-container">
+        <h2 class="sidebar-title">Why you'll love it</h2>
+        <ul class="sidebar-list">
+          <li>See all your accounts in one place</li>
+          <li>Set a budget and pay down your debt</li>
+          <li>Find the best way to grow your money</li>
+          <li>Stay <a href="#">safe and secure</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <div id="form-container">
+      <h1 id="form-title">See all your finances in one place & create a budget</h1>
+      <form id="form" method="get" action="sent.html">
+
+        <fieldset class="form-info">
+          <label>
+            Your Email
+            <input type="email" name="email" id="email" required>
+          </label>
+          <label>
+            Confirm Email
+            <input type="email" name="email_confirm" id="email_confirm" required>
+          </label>
+
+          <label>
+            Password
+            <input type="password" name="password" id="password" required>
+          </label>
+          <label>
+            Confirm Password
+            <input type="password" name="password_confirm" id="password_confirm" required>
+          </label>
+        </fieldset>
+
+        <fieldset class="form-action">
+          <label id="remember">
+            <input type="checkbox" name="remember">Remember me
+          </label>
+
+          <button name="submit">Sign Up</button>
+
+        </fieldset>
+      </form>
+
+      <p class="form-footer">By clicking Sign Up you agree to our <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a></p>
+
+
+    </div>
+  </section>
+
+  <footer>
+    <nav>
+      <ul class="footer-nav">
+        <li>Support Community</li>
+        <li>Terms of Use</li>
+        <li>Privacy</li>
+        <li>Legal and Trademark Notices</li>
+        <li>About Intuit</li>
+      </ul>
+    </nav>
+
+    <div class="footer-icons">
+      <img src="img/footer_icon_1.png">
+      <img src="img/footer_icon_2.png">
+    </div>
+
+    <p class="copyright">© 2016 Intuit, Inc.  |  ph7257.5 - spa77.24</p>
+  </footer>
+
+</div>
+
+<script type="text/javascript" src="./js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="./js/jquery.validate.min.js"></script>
+<script type="text/javascript">
+  $('#form').validate({
+    rules: {
+      email_confirm: {
+        equalTo: '#email'
+      },
+      password: {
+        pw: true,
+      },
+      password_confirm: {
+        equalTo: '#password'
+      }
+    }
+  });
+
+  $.validator.addMethod('pw', function(value, element) {
+    return this.optional(element) || /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}/.test(value);
+  }, "Use 8 or more characters, upper and lower case letters, a number and a symbol");
+
+</script>
+</body>
+</html>
